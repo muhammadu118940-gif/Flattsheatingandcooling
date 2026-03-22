@@ -1,0 +1,1513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flatt's Heating & Cooling | Sparta, TN HVAC Experts</title>
+<meta name="description" content="Flatt's Heating & Cooling — proudly serving Sparta, TN and surrounding areas for 15 years. Expert AC, heating, heat pump installation, repair & maintenance. 24/7 emergency service.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+<script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.82/build/spline-viewer.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --red:#ff0006;
+  --blue:#1b3eef;
+  --bg:#ffffff;
+  --surface:#f4f7ff;
+  --card:#ffffff;
+  --text:#111827;
+  --muted:#6b7280;
+  --border:rgba(0,0,0,0.09);
+  --radius:4px;
+  --card-radius:16px;
+  --section-pad:100px 48px;
+  --title-size:clamp(40px,4vw,68px);
+  --label-size:11px;
+  --label-spacing:0.15em;
+  --body-lh:1.7;
+}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{background:var(--bg);color:var(--text);font-family:'Barlow',sans-serif;font-weight:400;line-height:1.6;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+/* NAVBAR */
+#nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:20px 48px;display:flex;align-items:center;justify-content:space-between;transition:top 0.4s ease,left 0.4s ease,right 0.4s ease,padding 0.4s ease,background 0.4s ease,box-shadow 0.4s ease,border-radius 0.4s ease,border-color 0.4s ease}
+#nav.scrolled{background:rgba(255,255,255,0.95);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(0,0,0,0.09);padding:10px 32px;box-shadow:0 4px 24px rgba(0,0,0,0.09)}
+@media(min-width:900px){#nav.scrolled{top:12px;left:24px;right:24px;border-radius:10px}}
+.nav-logo{display:flex;align-items:center;flex-shrink:0}
+.nav-logo-img{height:44px;width:auto}
+.nav-links{display:flex;align-items:center;gap:36px;list-style:none}
+.nav-links a{font-size:13px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);position:relative;padding-bottom:3px;transition:color 0.3s}
+.nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--red);transition:width 0.35s ease}
+.nav-links a:hover{color:var(--text)}
+.nav-links a:hover::after{width:100%}
+.nav-links a.active{color:var(--text)}
+.nav-links a.active::after{width:100%;background:var(--red)}
+.nav-right{display:flex;align-items:center;gap:20px}
+.nav-phone{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--text);letter-spacing:0.02em}
+.nav-phone svg{color:var(--red)}
+.btn-nav{color:#fff;padding:10px 24px;font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;border-radius:var(--radius);transition:transform 0.2s;cursor:pointer;border:2px solid transparent;background:linear-gradient(#1b3eef,#1b3eef) padding-box,conic-gradient(from var(--btn-angle),#1530c0 0%,#5577ff 30%,#fff 50%,#5577ff 70%,#1530c0 100%) border-box;animation:btn-spark 2.5s linear infinite}
+.btn-nav:hover{background:linear-gradient(#1530c0,#1530c0) padding-box,conic-gradient(from var(--btn-angle),#0f229a 0%,#4060ee 30%,#fff 50%,#4060ee 70%,#0f229a 100%) border-box;transform:translateY(-1px)}
+.hamburger{display:none;align-items:center;justify-content:center;cursor:pointer;background:none;border:1px solid rgba(0,0,0,0.12);padding:6px;width:36px;height:36px;border-radius:var(--radius);color:var(--text);transition:border-color 0.2s,background 0.2s}
+.hamburger:hover{background:var(--surface)}
+.hamburger-svg{display:block;width:20px;height:20px;transition:transform 0.3s ease-in-out}
+.hamburger.open .hamburger-svg{transform:rotate(-45deg)}
+.hamburger-svg .h-path1{transition:stroke-dasharray 0.3s ease-in-out,stroke-dashoffset 0.3s ease-in-out;stroke-dasharray:12 63}
+.hamburger.open .hamburger-svg .h-path1{stroke-dasharray:20 300;stroke-dashoffset:-32.42px}
+/* DROPDOWN */
+.nav-links li{position:relative;list-style:none}
+.nav-drop-parent{display:flex;align-items:center;gap:5px;cursor:pointer;background:none;border:none;padding:0;font:inherit;text-decoration:none}
+.nav-chevron{width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2.5;flex-shrink:0;transition:transform 0.2s;margin-top:1px}
+.nav-links li:hover .nav-chevron,.nav-links li.dd-open .nav-chevron{transform:rotate(180deg)}
+.nav-dropdown{position:absolute;top:calc(100% + 14px);left:50%;transform:translateX(-50%) translateY(-6px);background:#fff;border:1px solid rgba(0,0,0,0.08);border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,0.13),0 2px 8px rgba(0,0,0,0.05);padding:8px;min-width:210px;opacity:0;pointer-events:none;transition:opacity 0.2s ease,transform 0.2s ease;z-index:1100}
+.nav-links li:hover .nav-dropdown,.nav-links li.dd-open .nav-dropdown{opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(0)}
+.nav-dropdown a{display:flex;align-items:center;gap:9px;padding:10px 14px;border-radius:8px;font-size:12px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--text);white-space:nowrap;transition:background 0.15s,color 0.15s}
+.nav-dropdown a::after{display:none!important}
+.nav-dropdown a:hover{background:var(--surface);color:var(--red)}
+.nav-dropdown-dot{width:5px;height:5px;border-radius:50%;background:var(--red);flex-shrink:0;opacity:0;transition:opacity 0.15s}
+.nav-dropdown a:hover .nav-dropdown-dot{opacity:1}
+/* Mobile menu */
+.mobile-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(255,255,255,0.99);backdrop-filter:blur(20px);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:24px;opacity:0;pointer-events:none;transition:opacity 0.3s;overflow-y:auto;padding:80px 32px}
+.mobile-menu.open{opacity:1;pointer-events:all;display:flex}
+.mobile-menu > a{font-family:'Barlow Condensed',sans-serif;font-size:42px;font-weight:800;letter-spacing:0.05em;text-transform:uppercase;color:var(--muted);transition:color 0.2s}
+.mobile-menu > a:hover{color:var(--text)}
+.mob-group{width:100%;text-align:center}
+.mob-group-title{font-family:'Barlow Condensed',sans-serif;font-size:42px;font-weight:800;letter-spacing:0.05em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;transition:color 0.2s;background:none;border:none;padding:0;width:100%}
+.mob-group-title:hover,.mob-group-title.open{color:var(--text)}
+.mob-group-title svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2.5;transition:transform 0.25s}
+.mob-group-title.open svg{transform:rotate(180deg)}
+.mob-subnav{max-height:0;overflow:hidden;transition:max-height 0.3s ease;display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:0}
+.mob-subnav.open{max-height:600px;margin-top:14px}
+.mob-subnav a{font-size:18px;font-family:'Barlow',sans-serif;font-weight:400;letter-spacing:0.04em;text-transform:uppercase;color:var(--muted);transition:color 0.2s}
+.mob-subnav a:hover{color:var(--red)}
+.mobile-menu .mob-phone{font-size:22px;font-family:'Barlow',sans-serif;font-weight:600;color:var(--text)}
+.mobile-menu .btn-nav{font-size:14px;padding:14px 40px}
+.mobile-menu .btn-primary{font-size:14px!important;letter-spacing:0.06em!important;color:#ffffff!important}
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;background:var(--bg)}
+#heroParticles{position:absolute;inset:0;z-index:0;pointer-events:none}
+#heroParticles canvas{display:block;width:100%!important;height:100%!important}
+.hero-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(0,0,0,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,0.04) 1px,transparent 1px);background-size:56px 56px}
+.hero-glow-red{position:absolute;top:-20%;left:-10%;width:700px;height:700px;background:radial-gradient(circle,rgba(255,0,6,0.08) 0%,transparent 65%);pointer-events:none}
+.hero-glow-blue{position:absolute;bottom:-20%;right:5%;width:600px;height:600px;background:radial-gradient(circle,rgba(27,62,239,0.07) 0%,transparent 65%);pointer-events:none}
+.hero-inner{position:relative;z-index:1;width:100%;max-width:1400px;margin:0 auto;padding:0 48px;display:grid;grid-template-columns:1fr 1fr;gap:120px;align-items:center;padding-top:100px;padding-bottom:80px}
+.hero-content{display:flex;flex-direction:column;gap:28px}
+.hero-badge{display:inline-flex;align-items:center;gap:10px;background:rgba(255,0,6,0.18);border:1px solid rgba(255,0,6,0.6);padding:8px 16px;border-radius:40px;font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#ff4444;width:fit-content;opacity:0;animation:fadeUp 0.6s 0.1s ease forwards}
+.badge-dot{width:8px;height:8px;background:var(--red);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(1.4)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@property --btn-angle{syntax:'<angle>';initial-value:0deg;inherits:false}
+@keyframes btn-spark{to{--btn-angle:360deg}}
+.hero-title{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(36px,5vw,76px);line-height:0.92;text-transform:uppercase;letter-spacing:-0.02em;color:var(--text);opacity:0;animation:fadeUp 0.6s 0.3s ease forwards}
+.hero-title .red{color:var(--red)}
+.hero-subtitle{font-size:16px;font-weight:400;color:var(--muted);line-height:1.7;max-width:480px;opacity:0;animation:fadeUp 0.6s 0.5s ease forwards}
+.hero-btns{display:flex;gap:16px;flex-wrap:wrap;opacity:0;animation:fadeUp 0.6s 0.7s ease forwards}
+.btn-primary{display:inline-flex;align-items:center;gap:10px;color:#ffffff;padding:16px 32px;font-size:14px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;border-radius:var(--radius);transition:transform 0.2s;border:2px solid transparent;background:linear-gradient(#ff0006,#ff0006) padding-box,conic-gradient(from var(--btn-angle),#cc0005 0%,#ff6666 30%,#fff 50%,#ff6666 70%,#cc0005 100%) border-box;animation:btn-spark 2.5s linear infinite}
+.btn-primary:hover{background:linear-gradient(#cc0005,#cc0005) padding-box,conic-gradient(from var(--btn-angle),#990004 0%,#ff4444 30%,#fff 50%,#ff4444 70%,#990004 100%) border-box;transform:translateY(-2px)}
+.btn-outline{display:inline-flex;align-items:center;gap:10px;color:var(--text);padding:15px 32px;font-size:14px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;border-radius:var(--radius);transition:color 0.2s,transform 0.2s;border:2px solid transparent;background:linear-gradient(var(--bg),var(--bg)) padding-box,conic-gradient(from var(--btn-angle),rgba(0,0,0,0.08) 0%,#1b3eef 40%,rgba(27,62,239,0.6) 60%,rgba(0,0,0,0.08) 100%) border-box;animation:btn-spark 2.5s linear infinite}
+.btn-outline:hover{color:#fff;background:#ff0006;border:2px solid #ff0006;animation:none}
+.hero-trust{display:flex;gap:28px;flex-wrap:wrap;opacity:0;animation:fadeUp 0.6s 0.9s ease forwards}
+.trust-item{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted)}
+.trust-item svg{color:var(--red)}
+/* CAROUSEL */
+.hero-carousel{position:relative;perspective:1200px;height:520px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.carousel-track{position:relative;width:100%;height:100%;transform-style:preserve-3d}
+.carousel-card{position:absolute;top:50%;left:50%;width:360px;height:460px;border-radius:16px;overflow:hidden;transition:all 0.7s cubic-bezier(0.25,0.46,0.45,0.94);transform-origin:center}
+.carousel-card img{width:100%;height:100%;object-fit:cover}
+.carousel-card.pos-center{transform:translate(-50%,-50%) rotateY(0deg) scale(1);opacity:1;filter:none;border:2px solid #ff0006;z-index:3;box-shadow:0 0 40px rgba(255,0,6,0.3)}
+.carousel-card.pos-left{transform:translate(calc(-50% - 280px),-50%) rotateY(12deg) scale(0.82);opacity:0.45;filter:blur(4px);z-index:1}
+.carousel-card.pos-right{transform:translate(calc(-50% + 280px),-50%) rotateY(-12deg) scale(0.82);opacity:0.45;filter:blur(4px);z-index:1}
+.carousel-card.pos-hidden{opacity:0;pointer-events:none;z-index:0;transform:translate(-50%,-50%) scale(0.7)}
+/* TRUST STRIP */
+/* TRUST STRIP */
+.trust-strip{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:20px 48px;text-align:center}
+.ts-label{font-size:11px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:14px}
+.ts-brands{display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:wrap}
+.ts-brand{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:16px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);padding:0 28px}
+.ts-dot{width:4px;height:4px;border-radius:50%;background:var(--border);flex-shrink:0}
+/* FINANCING SECTION */
+.financing{padding:100px 48px;background:var(--bg)}
+.financing-inner{max-width:1400px;margin:0 auto}
+.financing-card{position:relative;background:#ffffff;border:1px solid rgba(0,0,0,0.07);border-radius:var(--card-radius);padding:60px 64px;overflow:hidden;box-shadow:0 8px 48px rgba(27,62,239,0.08),0 2px 12px rgba(0,0,0,0.06)}
+/* animated border tracks */
+.fin-border-top,.fin-border-bottom{position:absolute;left:0;width:100%;height:2px;overflow:hidden}
+.fin-border-top{top:0}.fin-border-bottom{bottom:0}
+.fin-border-left,.fin-border-right{position:absolute;top:0;width:2px;height:100%;overflow:hidden}
+.fin-border-left{left:0}.fin-border-right{right:0}
+.fin-border-top .fin-bar{position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,0,6,0.5),transparent)}
+.fin-border-bottom .fin-bar{position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,0,6,0.5),transparent)}
+.fin-border-right .fin-bar{position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(180deg,transparent,rgba(27,62,239,0.5),transparent)}
+.fin-border-left .fin-bar{position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(180deg,transparent,rgba(27,62,239,0.5),transparent)}
+/* glow corners */
+.financing-card::before{content:'';position:absolute;top:-80px;right:-80px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(255,0,6,0.08) 0%,transparent 70%);pointer-events:none}
+.financing-card::after{content:'';position:absolute;bottom:-80px;left:-80px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(27,62,239,0.08) 0%,transparent 70%);pointer-events:none}
+.fin-mesh{position:absolute;inset:0;background-image:radial-gradient(rgba(27,62,239,0.04) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;border-radius:var(--card-radius)}
+.fin-pulse-red{position:absolute;top:20px;right:20px;width:10px;height:10px;border-radius:50%;background:var(--red);animation:fin-pulse 2s ease-in-out infinite}
+.fin-pulse-blue{position:absolute;bottom:20px;left:20px;width:10px;height:10px;border-radius:50%;background:var(--blue);animation:fin-pulse 2s ease-in-out infinite 1s}
+@keyframes fin-pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(1.4)}}
+.fin-content{position:relative;z-index:2;text-align:center}
+.fin-logo{height:56px;width:auto;object-fit:contain;margin:0 auto 32px;display:block}
+.fin-label{display:inline-flex;align-items:center;gap:10px;font-size:var(--label-size);font-weight:700;letter-spacing:var(--label-spacing);text-transform:uppercase;color:var(--red);margin-bottom:14px}
+.fin-label::before{content:'';width:24px;height:3px;background:var(--red)}
+.fin-title{font-family:'Barlow Condensed',sans-serif;font-size:var(--title-size);font-weight:900;letter-spacing:-0.01em;text-transform:uppercase;color:var(--text);line-height:0.95;margin-bottom:12px}
+.fin-title span{background:linear-gradient(90deg,var(--red),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.fin-subtitle{font-size:15px;font-weight:400;color:var(--muted);margin-bottom:32px;line-height:var(--body-lh)}
+.fin-divider{width:48px;height:2px;background:linear-gradient(90deg,var(--red),var(--blue));margin:0 auto 28px;border-radius:2px}
+.fin-desc{font-size:15px;color:var(--muted);line-height:var(--body-lh);max-width:680px;margin:0 auto 40px}
+@media(max-width:768px){.financing{padding:80px 24px}.financing-card{padding:48px 32px}}
+@media(max-width:600px){.financing{padding:60px 16px}.financing-card{padding:40px 24px}}
+/* FEATURED MANUFACTURERS */
+.fm-section{padding:100px 48px;background:var(--bg);overflow:hidden}
+.fm-inner{max-width:1400px;margin:0 auto}
+.fm-header{text-align:center;margin-bottom:64px}
+.fm-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;position:relative}
+.fm-card{position:relative;border-radius:var(--card-radius);overflow:hidden;cursor:pointer;background:var(--surface);border:1px solid var(--border);transition:transform 0.5s cubic-bezier(0.23,1,0.32,1),box-shadow 0.5s cubic-bezier(0.23,1,0.32,1);transform:translateY(0);will-change:transform}
+.fm-card:hover{transform:translateY(-12px) scale(1.02);box-shadow:0 32px 80px rgba(27,62,239,0.18),0 8px 24px rgba(0,0,0,0.12)}
+.fm-card-img{width:100%;aspect-ratio:4/3;object-fit:contain;object-position:center;display:block;transition:transform 0.7s cubic-bezier(0.23,1,0.32,1);padding:16px;background:var(--surface)}
+.fm-card:hover .fm-card-img{transform:scale(1.07)}
+.fm-card-overlay{position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(10,14,26,0.85) 100%);transition:opacity 0.4s ease}
+.fm-card-body{position:absolute;bottom:0;left:0;right:0;padding:28px;transform:translateY(8px);transition:transform 0.4s cubic-bezier(0.23,1,0.32,1)}
+.fm-card:hover .fm-card-body{transform:translateY(0)}
+.fm-card-num{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--red);margin-bottom:8px;display:block}
+.fm-card-title{font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:800;letter-spacing:0.04em;text-transform:uppercase;color:#fff;line-height:1.1;margin-bottom:6px}
+.fm-card-desc{font-size:13px;color:rgba(255,255,255,0.7);line-height:1.5;opacity:0;transform:translateY(8px);transition:opacity 0.35s ease 0.05s,transform 0.35s ease 0.05s}
+.fm-card:hover .fm-card-desc{opacity:1;transform:translateY(0)}
+.fm-card-glow{position:absolute;inset:-1px;border-radius:var(--card-radius);border:1px solid transparent;background:linear-gradient(135deg,var(--blue),var(--red)) border-box;-webkit-mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0);-webkit-mask-composite:destination-out;mask-composite:exclude;opacity:0;transition:opacity 0.4s ease}
+.fm-card:hover .fm-card-glow{opacity:1}
+.fm-card-badge{position:absolute;top:20px;right:20px;background:rgba(255,255,255,0.12);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.2);border-radius:40px;padding:5px 14px;font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#fff;transform:translateY(-4px);opacity:0;transition:opacity 0.4s ease,transform 0.4s ease}
+.fm-card:hover .fm-card-badge{opacity:1;transform:translateY(0)}
+/* stagger reveal */
+.fm-card{opacity:0;transform:translateY(48px)}
+.fm-card.fm-visible{animation:fm-rise 0.75s cubic-bezier(0.23,1,0.32,1) forwards}
+.fm-card:nth-child(1){animation-delay:0s}
+.fm-card:nth-child(2){animation-delay:0.12s}
+.fm-card:nth-child(3){animation-delay:0.24s}
+@keyframes fm-rise{from{opacity:0;transform:translateY(48px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:900px){.fm-section{padding:80px 24px}.fm-grid{grid-template-columns:1fr;gap:20px}}
+@media(max-width:600px){.fm-section{padding:60px 16px}.fm-header{margin-bottom:40px}}
+/* SERVICES SHOWCASE */
+.services-showcase{padding:var(--section-pad);background:var(--bg)}
+.section-inner{max-width:1400px;margin:0 auto}
+.section-label{display:inline-flex;align-items:center;gap:10px;font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--red);margin-bottom:16px}
+.section-label::before{content:'';width:24px;height:3px;background:var(--red)}
+.section-title{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(40px,4vw,68px);text-transform:uppercase;line-height:0.95;letter-spacing:-0.01em;color:var(--text);margin-bottom:60px}
+.section-title .red{color:var(--red)}
+.services-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:2px;background:var(--border);border-radius:12px;overflow:hidden;height:600px}
+.svc-left{background:#eef2ff;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:center;padding:32px 24px}
+.svc-fade-top{position:absolute;top:0;left:0;right:0;height:80px;background:linear-gradient(to bottom,#eef2ff,transparent);z-index:2;pointer-events:none}
+.svc-fade-bot{position:absolute;bottom:0;left:0;right:0;height:80px;background:linear-gradient(to top,#eef2ff,transparent);z-index:2;pointer-events:none}
+.svc-chips{display:flex;flex-direction:column;gap:4px;z-index:1}
+.svc-chip{display:flex;align-items:center;gap:14px;padding:14px 16px;border:1px solid transparent;border-radius:var(--radius);cursor:pointer;transition:all 0.25s;color:var(--muted);font-size:14px;font-weight:500;letter-spacing:0.02em;background:transparent;text-align:left}
+.svc-chip svg{flex-shrink:0;color:var(--muted);transition:color 0.25s}
+.svc-chip:hover{border-color:rgba(27,62,239,0.3);color:var(--text)}
+.svc-chip.active{background:#1b3eef;color:#fff;border-color:#1b3eef}
+.svc-chip.active svg{color:#fff}
+.svc-right{background:var(--card);position:relative;overflow:hidden}
+.svc-panel{position:absolute;inset:0;opacity:0;transition:all 0.5s ease;transform:translateX(60px);pointer-events:none}
+.svc-panel.active{opacity:1;transform:translateX(0);pointer-events:all}
+.svc-panel img{width:100%;height:100%;object-fit:cover}
+.svc-panel-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(7,7,15,0.95) 0%,rgba(7,7,15,0.3) 50%,transparent 100%)}
+.svc-panel-content{position:absolute;bottom:0;left:0;right:0;padding:40px}
+.svc-num{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.15em;color:var(--red);margin-bottom:8px}
+.svc-name{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:36px;text-transform:uppercase;color:#fff;margin-bottom:10px;line-height:1}
+.svc-desc{font-size:14px;color:rgba(255,255,255,0.7);margin-bottom:20px;max-width:400px;line-height:1.6}
+.svc-link{font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--red);display:inline-flex;align-items:center;gap:8px;transition:gap 0.2s}
+.svc-link:hover{gap:14px}
+/* ABOUT PREVIEW */
+.about-preview{padding:var(--section-pad);background:var(--surface)}
+.about-inner{max-width:1400px;margin:0 auto;display:flex;align-items:center;gap:40px}
+.about-text{flex:1}
+.about-label{display:inline-flex;align-items:center;gap:10px;font-size:var(--label-size);font-weight:700;letter-spacing:var(--label-spacing);text-transform:uppercase;color:var(--red);margin-bottom:24px}
+.about-label::before{content:'';width:24px;height:3px;background:var(--red)}
+.about-title{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:var(--title-size);text-transform:uppercase;line-height:0.95;letter-spacing:-0.01em;color:var(--text);margin-bottom:28px}
+.about-title .red{color:var(--red);display:inline-block;transition:transform 0.3s}
+.about-preview:hover .about-title .red{transform:translateX(4px)}
+.about-desc{font-size:15px;color:var(--muted);line-height:var(--body-lh);margin-bottom:36px;max-width:520px}
+.about-cta{display:flex;align-items:center;gap:20px;cursor:pointer}
+.about-circle{width:52px;height:52px;border-radius:50%;border:2px solid rgba(0,0,0,0.2);display:flex;align-items:center;justify-content:center;transition:all 0.3s;flex-shrink:0}
+.about-preview:hover .about-circle{border-color:#ff0006;background:#ff0006}
+.about-circle svg{transition:transform 0.3s}
+.about-preview:hover .about-circle svg{transform:rotate(45deg)}
+.about-cta-text{font-size:14px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--text);transition:transform 0.3s}
+.about-preview:hover .about-cta-text{transform:translateX(6px)}
+.about-image{width:620px;flex-shrink:0;position:relative}
+.about-frame{position:absolute;inset:-16px;border:1px solid transparent;border-radius:var(--radius);transition:border-color 0.4s;pointer-events:none;z-index:2}
+.about-preview:hover .about-frame{border-color:#ff0006}
+.about-img-wrap{height:580px;border-radius:var(--radius);position:relative;overflow:hidden;background:var(--surface);padding:20px}
+.about-img-wrap img{width:100%;height:100%;object-fit:contain;object-position:center center;transition:transform 0.6s ease}
+.about-preview:hover .about-img-wrap img{transform:scale(1.03)}
+.corner{position:absolute;width:20px;height:20px;opacity:0;transition:all 0.4s;z-index:3}
+.corner-tl{top:8px;left:8px;border-top:2px solid #fff;border-left:2px solid #fff;transform:scale(0.5);transform-origin:top left}
+.corner-tr{top:8px;right:8px;border-top:2px solid #fff;border-right:2px solid #fff;transform:scale(0.5);transform-origin:top right}
+.corner-bl{bottom:8px;left:8px;border-bottom:2px solid #fff;border-left:2px solid #fff;transform:scale(0.5);transform-origin:bottom left}
+.corner-br{bottom:8px;right:8px;border-bottom:2px solid #fff;border-right:2px solid #fff;transform:scale(0.5);transform-origin:bottom right}
+.about-preview:hover .corner{opacity:1;transform:scale(1)}
+.about-est{position:absolute;bottom:20px;right:20px;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:13px;letter-spacing:0.15em;color:rgba(255,255,255,0.5);z-index:4;transition:transform 0.4s}
+.about-preview:hover .about-est{transform:translateY(4px)}
+/* STATS BAR */
+.stats-bar{background:var(--red);position:relative}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:rgba(0,0,0,0.15);max-width:100%}
+.stat-cell{background:var(--red);padding:52px 32px;text-align:center}
+.stat-num{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:72px;line-height:1;color:#fff;display:block}
+.stat-label{font-size:11px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.7);margin-top:6px;display:block}
+/* AREAS */
+.areas{padding:100px 48px;background:var(--bg);overflow:visible}
+.areas-card{background:var(--surface);border-radius:var(--card-radius);border:1px solid var(--border);box-shadow:0 8px 48px rgba(0,0,0,0.06);padding:64px 64px 0 64px;display:flex;align-items:center;gap:20px;position:relative;max-width:1400px;margin:0 auto;overflow:visible}
+.areas-text{flex:1;z-index:2;padding-bottom:64px}
+.areas .section-title{margin-bottom:0}
+.areas-subtitle{font-size:15px;color:var(--muted);margin:14px 0 36px;max-width:420px;line-height:1.7}
+.areas-list{display:grid;grid-template-columns:1fr 1fr;gap:14px 48px;margin-bottom:40px}
+.area-item{display:flex;align-items:center;gap:10px}
+.area-dot{width:8px;height:8px;background:#ff0006;border-radius:50%;flex-shrink:0}
+.area-name{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:17px;text-transform:uppercase;letter-spacing:0.05em;color:var(--text)}
+.area-state{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.12em;margin-left:4px;font-weight:500}
+.areas-globe{width:620px;height:620px;position:static;flex-shrink:0;align-self:flex-end;z-index:100;overflow:visible;aspect-ratio:1}
+#globeCanvas{width:100%;height:100%;opacity:0;transition:opacity 0.7s;cursor:grab;display:block}
+/* TESTIMONIALS — STAGGER CAROUSEL */
+.testimonials{padding:100px 0 0;background:var(--surface)}
+.testimonials .section-inner{padding:0 48px 0}
+.testimonials .section-title{margin-bottom:0}
+.stagger-wrap{position:relative;height:420px;overflow:hidden;background:rgba(244,247,255,0.6);margin-top:28px}
+.stagger-stage{position:relative;width:100%;height:100%}
+.stagger-card{position:absolute;left:50%;top:50%;padding:28px 28px 24px;cursor:pointer;border:2px solid rgba(0,0,0,0.09);background:#fff;transition:all 0.5s cubic-bezier(0.25,0.46,0.45,0.94);display:flex;flex-direction:column}
+.stagger-card-center{background:#1b3eef;border-color:#1b3eef}
+.stagger-line{position:absolute;display:block;transform-origin:top right;transform:rotate(45deg);height:2px;background:rgba(0,0,0,0.1);top:48px;right:-2px}
+.stagger-card-center .stagger-line{background:rgba(255,255,255,0.2)}
+.stagger-avatar{width:40px;height:40px;display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:20px;color:#fff;margin-bottom:10px;flex-shrink:0;box-shadow:3px 3px 0px rgba(0,0,0,0.08)}
+.stagger-card-center .stagger-avatar{box-shadow:3px 3px 0px rgba(0,0,0,0.2)}
+.stagger-quote{font-size:14px;font-weight:500;line-height:1.55;color:#111827;margin:0;flex:1}
+.stagger-stars{display:flex;gap:3px;margin-bottom:10px}
+.stagger-star{color:#f59e0b;font-size:15px}
+.stagger-card-center .stagger-star{color:#fde68a}
+.stagger-card-center .stagger-quote{color:#fff}
+.stagger-author{font-size:12px;font-style:italic;color:#6b7280;margin:12px 0 0;padding-top:10px;border-top:1px solid rgba(0,0,0,0.07)}
+.stagger-card-center .stagger-author{color:rgba(255,255,255,0.75);border-top-color:rgba(255,255,255,0.15)}
+.stagger-controls{display:flex;gap:8px;justify-content:center;margin-top:24px;padding-bottom:60px}
+.stagger-btn{width:56px;height:56px;display:flex;align-items:center;justify-content:center;background:#fff;border:2px solid rgba(0,0,0,0.12);border-radius:var(--radius);cursor:pointer;transition:all 0.2s;color:#111827}
+.stagger-btn:hover{background:#ff0006;border-color:#ff0006;color:#fff}
+.stagger-btn svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2}
+/* FOOTER */
+footer{background:#111827;border-top:4px solid var(--red);position:relative;overflow:hidden}
+#footerCanvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:0.45;display:block}
+footer::after{content:'';position:absolute;inset:0;background:rgba(10,14,26,0.65);pointer-events:none;z-index:0}
+.footer-main{max-width:1400px;margin:0 auto;padding:72px 48px 48px;display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:48px;position:relative;z-index:1}
+.footer-brand .nav-logo-img{filter:brightness(0) invert(1)}
+.footer-brand p{font-size:14px;color:#ffffff;line-height:1.7;margin:16px 0 24px}
+.footer-tagline{font-size:12px;font-style:italic;color:#ffffff;margin-bottom:16px!important}
+.payment-icons{display:flex;gap:8px;flex-wrap:wrap}
+.pay-icon{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);padding:5px 12px;border-radius:var(--radius);font-size:10px;font-weight:700;letter-spacing:0.08em;color:#ffffff}
+.footer-col h4{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:0.1em;color:#ffffff;margin-bottom:20px}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.footer-col ul a{font-size:14px;color:#ffffff;transition:color 0.2s}
+.footer-col ul a:hover{color:#ffffff;opacity:0.75}
+.footer-contact-item{display:flex;gap:10px;font-size:14px;color:#ffffff;margin-bottom:12px;line-height:1.5}
+.footer-contact-item svg{flex-shrink:0;margin-top:2px;color:var(--red)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,0.1);max-width:1400px;margin:0 auto;padding:20px 48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;position:relative;z-index:1}
+.footer-copy{font-size:12px;color:#ffffff}
+.footer-badge{font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#ffffff;background:#1b3eef;border:1px solid #1b3eef;padding:4px 12px;border-radius:40px}
+.footer-bottom-right{display:flex;align-items:center;gap:16px}
+.footer-dev-link{display:flex;align-items:center;gap:12px;opacity:0.7;transition:opacity 0.2s}
+.footer-dev-link:hover{opacity:1}
+.footer-dev-logo{height:17px;width:auto;filter:brightness(0) invert(1)}.footer-dev-text{font-size:12px;color:rgba(255,255,255,0.6);font-weight:500;letter-spacing:0.05em}
+/* SPLINE CTA SECTION */
+.spline-cta{padding:var(--section-pad);background:var(--bg)}
+.spline-card{background:#06060f;border-radius:var(--card-radius);overflow:hidden;position:relative;height:500px;display:flex;border:1px solid rgba(255,255,255,0.07);box-shadow:0 32px 80px rgba(0,0,0,0.18);max-width:1400px;margin:0 auto}
+.spline-spotlight{pointer-events:none;position:absolute;z-index:1;width:500px;height:500px;background:radial-gradient(circle at center,rgba(255,255,255,0.10) 0%,transparent 65%);border-radius:50%;transform:translate(-50%,-50%);opacity:0;transition:opacity 0.4s;left:0;top:0}
+.spline-left{flex:1;padding:56px 48px;position:relative;z-index:2;display:flex;flex-direction:column;justify-content:center}
+.spline-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:var(--label-size);font-weight:700;letter-spacing:var(--label-spacing);text-transform:uppercase;color:var(--red);margin-bottom:14px}
+.spline-eyebrow::before{content:'';width:24px;height:3px;background:var(--red)}
+.spline-heading{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:var(--title-size);line-height:0.95;color:#ffffff;margin-bottom:18px;background:linear-gradient(180deg,#ffffff 0%,rgba(255,255,255,0.45) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.spline-desc{font-size:15px;color:rgba(255,255,255,0.55);line-height:var(--body-lh);max-width:380px;margin-bottom:36px}
+.spline-form{display:flex;gap:10px;flex-wrap:wrap}
+.spline-input{flex:1;min-width:190px;padding:14px 20px;border-radius:var(--radius);border:1.5px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.06);color:#ffffff;font-size:14px;font-family:'Barlow',sans-serif;outline:none;transition:border-color 0.2s,background 0.2s}
+.spline-input::placeholder{color:rgba(255,255,255,0.3)}
+.spline-input:focus{border-color:rgba(255,255,255,0.35);background:rgba(255,255,255,0.09)}
+.spline-right{flex:1;position:relative}
+.spline-right spline-viewer{position:absolute;inset:0;width:100%;height:100%}
+@media(max-width:768px){.spline-cta{padding:60px 20px}.spline-card{flex-direction:column;height:auto}.spline-left{padding:36px 24px}.spline-right{height:320px}.spline-form{flex-direction:column}}
+/* REVEAL ANIMATION */
+.reveal{opacity:0;transform:translateY(32px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+/* RESPONSIVE */
+@media(max-width:1100px){
+  .hero-inner{grid-template-columns:1fr;gap:40px;padding-top:140px;padding-bottom:60px}
+  .services-showcase,.about-preview,.financing,.fm-section,.areas,.spline-cta{padding:80px 40px}
+  .hero-carousel{height:380px}
+  .carousel-card{width:280px;height:360px}
+  .carousel-card.pos-left{transform:translate(calc(-50% - 210px),-50%) rotateY(12deg) scale(0.82)}
+  .carousel-card.pos-right{transform:translate(calc(-50% + 210px),-50%) rotateY(-12deg) scale(0.82)}
+  .about-inner{flex-direction:column;gap:48px}
+  .about-image{width:100%}
+  .about-img-wrap{height:360px}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .areas-card{flex-direction:column;padding:40px 32px 40px;gap:16px;overflow:hidden}
+  .areas-text{padding-bottom:0}
+  .areas-subtitle{max-width:100%}
+  .areas-list{gap:12px 24px}
+  .areas-globe{width:min(100%,420px);height:auto;aspect-ratio:1;margin:0 auto;align-self:center;overflow:hidden}
+  .testi-grid{grid-template-columns:1fr}
+  .resources-grid{grid-template-columns:1fr}
+  .footer-main{grid-template-columns:1fr 1fr}
+  .services-grid{grid-template-columns:1fr;height:auto}
+  .svc-right{height:400px;position:relative}
+}
+@media(max-width:900px){
+  #nav{padding:16px 24px}
+  #nav.scrolled{padding:10px 20px}
+  .nav-links,.nav-phone,.btn-nav{display:none}
+  .nav-right .btn-primary{display:none}
+  .hamburger{display:flex}
+  .hero-inner{padding:0 24px;padding-top:120px;gap:32px}
+  .services-showcase,.about-preview,.financing,.fm-section,.areas,.spline-cta{padding:80px 24px}
+  .areas{padding:60px 16px}
+  .testimonials{padding:60px 0 0}
+  .testimonials .section-inner{padding:0 24px 0}
+  .stagger-wrap{height:500px;margin-top:36px}
+
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .footer-main{grid-template-columns:1fr;padding:48px 24px 32px;text-align:center}
+  .footer-col ul{align-items:center}
+  .footer-contact-item{justify-content:center}
+  .payment-icons{justify-content:center}
+  .footer-bottom{padding:20px 24px;flex-direction:column;text-align:center}
+  .hero-trust{justify-content:center;gap:16px}
+}
+@media(max-width:768px){
+  .hero-inner{padding:0 20px;padding-top:110px;gap:28px}
+  .services-showcase,.about-preview,.financing,.fm-section,.areas,.spline-cta{padding:70px 20px}
+  .areas{padding:60px 16px}
+  .footer-main{padding:48px 20px 32px}
+  .footer-bottom{padding:20px 20px}
+
+  .section-title{font-size:clamp(32px,7vw,56px)}
+  .carousel-card{width:260px;height:340px}
+  .carousel-card.pos-left{transform:translate(calc(-50% - 190px),-50%) rotateY(12deg) scale(0.82)}
+  .carousel-card.pos-right{transform:translate(calc(-50% + 190px),-50%) rotateY(-12deg) scale(0.82)}
+  .hero-carousel{height:340px}
+  .about-img-wrap{height:300px}
+}
+@media(max-width:600px){
+  .areas{padding:40px 12px}
+  .areas-card{padding:28px 16px 28px;gap:12px}
+  .areas-text{padding-bottom:0}
+  .areas-list{grid-template-columns:1fr 1fr;gap:10px 16px}
+  .area-name{font-size:14px}
+  .areas-globe{width:min(100%,300px)}
+  .stats-grid{grid-template-columns:1fr 1fr}
+  /* ── Global mobile centering ── */
+  .section-inner,.services-showcase .section-inner,.about-preview,.areas-text{text-align:center}
+  .section-label{margin-left:auto;margin-right:auto}
+  .section-title{text-align:center}
+  /* Hero */
+  .hero-content{align-items:center;text-align:center}
+  .hero-subtitle{text-align:center;max-width:100%}
+  .hero-badge{margin:0 auto}
+  .hero-btns{flex-direction:column;align-items:stretch}
+  /* Services */
+  .svc-chip{justify-content:center}
+  /* About */
+  .about-text{text-align:center}
+  .about-label{justify-content:center}
+  .about-desc{max-width:100%}
+  .about-cta{justify-content:center}
+  /* Service Areas */
+  .areas-text{text-align:center}
+  .areas-subtitle{text-align:center;max-width:100%}
+  .areas-list{justify-items:center}
+  .area-item{justify-content:center}
+  /* Testimonials */
+  .testimonials .section-inner{text-align:center}
+  /* Buttons */
+  .cta-btns{flex-direction:column;align-items:stretch}
+  .btn-primary,.btn-outline{width:100%;justify-content:center}
+  .areas-text .btn-primary{display:flex}
+  .testimonials{padding:50px 0 0}
+  .testimonials .section-inner{padding:0 20px 0}
+  .stagger-wrap{margin-top:24px;height:auto;display:flex;flex-direction:column;background:rgba(244,247,255,0.6);overflow:hidden}
+  .stagger-stage{height:380px;flex-shrink:0;overflow:hidden}
+  .stagger-controls{margin-top:16px;padding-bottom:32px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="nav">
+  <a href="index.html" class="nav-logo">
+    <img src="https://flattsheatingandcooling.com/wp-content/uploads/2023/07/logo.webp" alt="Flatts Heating &amp; Cooling" class="nav-logo-img">
+  </a>
+  <ul class="nav-links">
+    <li>
+      <span class="nav-drop-parent">Services<svg class="nav-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+      <div class="nav-dropdown">
+        <a href="ac.html"><span class="nav-dropdown-dot"></span>Air Conditioning</a>
+        <a href="heating.html"><span class="nav-dropdown-dot"></span>Heating</a>
+        <a href="heat-pumps.html"><span class="nav-dropdown-dot"></span>Heat Pumps</a>
+        <a href="indoor-air-quality.html"><span class="nav-dropdown-dot"></span>Indoor Air Quality</a>
+        <a href="refrigeration.html"><span class="nav-dropdown-dot"></span>Refrigeration</a>
+        <a href="water-heaters.html"><span class="nav-dropdown-dot"></span>Water Heaters</a>
+        <a href="generators.html"><span class="nav-dropdown-dot"></span>Generators</a>
+      </div>
+    </li>
+    <li>
+      <span class="nav-drop-parent">Service Areas<svg class="nav-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+      <div class="nav-dropdown">
+        <a href="sparta-tn.html"><span class="nav-dropdown-dot"></span>Sparta, TN</a>
+        <a href="cookeville-tn.html"><span class="nav-dropdown-dot"></span>Cookeville, TN</a>
+        <a href="crossville-tn.html"><span class="nav-dropdown-dot"></span>Crossville, TN</a>
+        <a href="smithville-tn.html"><span class="nav-dropdown-dot"></span>Smithville, TN</a>
+        <a href="spencer-tn.html"><span class="nav-dropdown-dot"></span>Spencer, TN</a>
+        <a href="mcminnville-tn.html"><span class="nav-dropdown-dot"></span>McMinnville, TN</a>
+        <a href="monterey-tn.html"><span class="nav-dropdown-dot"></span>Monterey, TN</a>
+        <a href="fairfield-glade-tn.html"><span class="nav-dropdown-dot"></span>Fairfield Glade, TN</a>
+      </div>
+    </li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="tel:9318084249" class="btn-primary" style="padding:10px 22px;font-size:12px">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.87 9.8 19.79 19.79 0 01.78 1.14 2 2 0 012.76 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.18 6.18l1.28-1.28a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+      (931) 808-4249
+    </a>
+    <a href="contact.html" class="btn-nav">Free Quote</a>
+  </div>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <svg class="hamburger-svg" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path class="h-path1" d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22"/>
+      <path d="M7 16 27 16"/>
+    </svg>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mob-group">
+    <button class="mob-group-title" id="mobServicesToggle">Services<svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+    <div class="mob-subnav" id="mobServicesMenu">
+      <a href="ac.html">Air Conditioning</a>
+      <a href="heating.html">Heating</a>
+      <a href="heat-pumps.html">Heat Pumps</a>
+      <a href="indoor-air-quality.html">Indoor Air Quality</a>
+      <a href="refrigeration.html">Refrigeration</a>
+      <a href="water-heaters.html">Water Heaters</a>
+      <a href="generators.html">Generators</a>
+    </div>
+  </div>
+  <div class="mob-group">
+    <button class="mob-group-title" id="mobAreasToggle">Service Areas<svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+    <div class="mob-subnav" id="mobAreasMenu">
+      <a href="sparta-tn.html">Sparta, TN</a>
+      <a href="cookeville-tn.html">Cookeville, TN</a>
+      <a href="crossville-tn.html">Crossville, TN</a>
+      <a href="smithville-tn.html">Smithville, TN</a>
+      <a href="spencer-tn.html">Spencer, TN</a>
+      <a href="mcminnville-tn.html">McMinnville, TN</a>
+      <a href="monterey-tn.html">Monterey, TN</a>
+      <a href="fairfield-glade-tn.html">Fairfield Glade, TN</a>
+    </div>
+  </div>
+  <a href="about.html">About</a>
+  <a href="contact.html">Contact</a>
+  <a href="tel:9318084249" class="btn-primary">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.87 9.8 19.79 19.79 0 01.78 1.14 2 2 0 012.76 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.18 6.18l1.28-1.28a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+    (931) 808-4249
+  </a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div id="heroParticles"></div>
+  <div class="hero-bg"></div>
+  <div class="hero-glow-red"></div>
+  <div class="hero-glow-blue"></div>
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        24/7 Emergency Service &middot; Sparta, TN
+      </div>
+      <h1 class="hero-title">YOUR COMFORT,<br>OUR <span class="red">COMMITMENT</span></h1>
+      <p class="hero-subtitle">Proudly serving the Sparta area for 15 years. Expert HVAC installation, repair &amp; maintenance — available 24/7 when you need us most.</p>
+      <div class="hero-btns">
+        <a href="tel:9318084249" class="btn-primary">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.87 9.8 19.79 19.79 0 01.78 1.14 2 2 0 012.76 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.18 6.18l1.28-1.28a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          (931) 808-4249
+        </a>
+        <a href="contact.html" class="btn-outline">Get Free Quote</a>
+      </div>
+      <div class="hero-trust">
+        <div class="trust-item">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Licensed &amp; Insured
+        </div>
+        <div class="trust-item">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          15+ Years Serving Sparta
+        </div>
+        <div class="trust-item">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          24/7 Emergency
+        </div>
+      </div>
+    </div>
+    <div class="hero-carousel">
+      <div class="carousel-track" id="carouselTrack">
+        <div class="carousel-card pos-center" data-idx="0">
+          <img src="Assets/hero-1.jpg" alt="HVAC Technician">
+        </div>
+        <div class="carousel-card pos-right" data-idx="1">
+          <img src="Assets/hero-3.jpg" alt="AC Unit">
+        </div>
+        <div class="carousel-card pos-hidden" data-idx="2">
+          <img src="Assets/hero-4.webp" alt="Comfortable Home">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST STRIP -->
+<div class="trust-strip">
+  <span class="ts-label">Authorized Dealer</span>
+  <div class="ts-brands">
+    <span class="ts-brand">Goodman</span><span class="ts-dot"></span>
+    <span class="ts-brand">Trane</span><span class="ts-dot"></span>
+    <span class="ts-brand">Rheem</span><span class="ts-dot"></span>
+    <span class="ts-brand">Generac</span><span class="ts-dot"></span>
+    <span class="ts-brand">Carrier</span><span class="ts-dot"></span>
+    <span class="ts-brand">Lennox</span><span class="ts-dot"></span>
+    <span class="ts-brand">York</span>
+  </div>
+</div>
+
+<!-- SERVICES SHOWCASE -->
+<section class="services-showcase" id="services-showcase">
+  <div class="section-inner">
+    <div class="section-label reveal">Our Services</div>
+    <h2 class="section-title reveal">Our <span class="red">Services</span></h2>
+    <div class="services-grid reveal">
+      <!-- LEFT CHIPS -->
+      <div class="svc-left">
+        <div class="svc-fade-top"></div>
+        <div class="svc-chips" id="svcChips">
+          <button class="svc-chip active" data-svc="0">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 1 0 20A10 10 0 0 1 12 2z"/><path d="M8.5 8.5l7 7"/><path d="M15.5 8.5l-7 7"/></svg>
+            Air Conditioning
+          </button>
+          <button class="svc-chip" data-svc="1">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2c0 6-6 8-6 14a6 6 0 0 0 12 0c0-6-6-8-6-14z"/></svg>
+            Heating
+          </button>
+          <button class="svc-chip" data-svc="2">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 16V4m0 0L3 8m4-4 4 4"/><path d="M17 8v12m0 0 4-4m-4 4-4-4"/></svg>
+            Heat Pumps
+          </button>
+          <button class="svc-chip" data-svc="3">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/><path d="M7 8h.01M7 12h.01"/></svg>
+            Refrigeration
+          </button>
+          <button class="svc-chip" data-svc="4">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 20A7 7 0 0 1 4 13c0-4 3.5-8 7-11 3.5 3 7 7 7 11a7 7 0 0 1-7 7z"/></svg>
+            Indoor Air Quality
+          </button>
+          <button class="svc-chip" data-svc="5">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            Generators
+          </button>
+        </div>
+        <div class="svc-fade-bot"></div>
+      </div>
+      <!-- RIGHT PANELS -->
+      <div class="svc-right">
+        <div class="svc-panel active" data-panel="0">
+          <img src="Assets/Ac.jpg" alt="Air Conditioning">
+          <div class="svc-panel-overlay"></div>
+          <div class="svc-panel-content">
+            <div class="svc-num">01</div>
+            <div class="svc-name">Air Conditioning</div>
+            <div class="svc-desc">Stay cool all summer with expert AC installation, repair, and tune-ups. We service all makes and models.</div>
+            <a href="services.html" class="svc-link">Learn More →</a>
+          </div>
+        </div>
+        <div class="svc-panel" data-panel="1">
+          <img src="Assets/heating-rep.webp" alt="Heating">
+          <div class="svc-panel-overlay"></div>
+          <div class="svc-panel-content">
+            <div class="svc-num">02</div>
+            <div class="svc-name">Heating</div>
+            <div class="svc-desc">From furnace repair to full system replacements, we keep your home warm and comfortable through every Tennessee winter.</div>
+            <a href="services.html" class="svc-link">Learn More →</a>
+          </div>
+        </div>
+        <div class="svc-panel" data-panel="2">
+          <img src="Assets/heat-pumps.jpg" alt="Heat Pumps">
+          <div class="svc-panel-overlay"></div>
+          <div class="svc-panel-content">
+            <div class="svc-num">03</div>
+            <div class="svc-name">Heat Pumps</div>
+            <div class="svc-desc">Efficient year-round comfort with modern heat pump systems. Heating and cooling in one unit — ideal for Middle Tennessee.</div>
+            <a href="services.html" class="svc-link">Learn More →</a>
+          </div>
+        </div>
+        <div class="svc-panel" data-panel="3">
+          <img src="Assets/refrigerator.webp" alt="Refrigeration">
+          <div class="svc-panel-overlay"></div>
+          <div class="svc-panel-content">
+            <div class="svc-num">04</div>
+            <div class="svc-name">Refrigeration</div>
+            <div class="svc-desc">Commercial and residential refrigeration services including installation, repair, and preventive maintenance to keep your systems running efficiently.</div>
+            <a href="services.html" class="svc-link">Learn More →</a>
+          </div>
+        </div>
+        <div class="svc-panel" data-panel="4">
+          <img src="Assets/indoor-rep.webp" alt="Indoor Air Quality">
+          <div class="svc-panel-overlay"></div>
+          <div class="svc-panel-content">
+            <div class="svc-num">05</div>
+            <div class="svc-name">Indoor Air Quality</div>
+            <div class="svc-desc">Breathe easier with air purifiers, UV lights, humidifiers, and filtration systems that eliminate pollutants and allergens.</div>
+            <a href="services.html" class="svc-link">Learn More →</a>
+          </div>
+        </div>
+        <div class="svc-panel" data-panel="5">
+          <img src="Assets/generator-rep.jpg" alt="Generators">
+          <div class="svc-panel-overlay"></div>
+          <div class="svc-panel-content">
+            <div class="svc-num">06</div>
+            <div class="svc-name">Generators</div>
+            <div class="svc-desc">Authorized Generac dealer. Keep your home powered during outages with standby or portable generator installation.</div>
+            <a href="services.html" class="svc-link">Learn More →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT PREVIEW -->
+<section class="about-preview" id="about-preview">
+  <div class="about-inner">
+    <div class="about-text reveal">
+      <div class="about-label">— About Flatt's</div>
+      <h2 class="about-title">About Flatt's<br><span class="red">Heating & Cooling</span></h2>
+      <p class="about-desc">Founded by Joey Flatt, Flatt's Heating &amp; Cooling has been the trusted HVAC provider for Sparta and surrounding communities since 2009. With over 25 years of combined industry experience, our team delivers the highest quality parts, exceptional workmanship, and every job backed by our satisfaction warranty. We're not just contractors — we're your neighbors.</p>
+      <a href="about.html" class="about-cta">
+        <div class="about-circle">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </div>
+        <span class="about-cta-text">Learn Our Story</span>
+      </a>
+    </div>
+    <div class="about-image reveal">
+      <div class="about-frame"></div>
+      <div class="about-img-wrap">
+        <div class="corner corner-tl"></div>
+        <div class="corner corner-tr"></div>
+        <div class="corner corner-bl"></div>
+        <div class="corner corner-br"></div>
+        <img src="Assets/about image.webp" alt="Flatt's Heating & Cooling Team">
+      </div>
+      <div class="about-est">EST. 2009</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="testimonials">
+  <div class="section-inner">
+    <div class="section-label reveal">What Customers Say</div>
+    <h2 class="section-title reveal">Client <span class="red">Reviews</span></h2>
+  </div>
+  <div class="stagger-wrap">
+    <div class="stagger-stage" id="staggerStage"></div>
+  </div>
+  <div class="stagger-controls">
+    <button class="stagger-btn" id="staggerPrev" aria-label="Previous testimonial">
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <button class="stagger-btn" id="staggerNext" aria-label="Next testimonial">
+      <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg>
+    </button>
+  </div>
+</section>
+
+<!-- FINANCING -->
+<section class="financing" id="financing">
+  <div class="financing-inner">
+    <div class="financing-card" id="financingCard">
+
+      <!-- Animated border bars -->
+      <div class="fin-border-top"><div class="fin-bar" id="finTop"></div></div>
+      <div class="fin-border-right"><div class="fin-bar" id="finRight"></div></div>
+      <div class="fin-border-bottom"><div class="fin-bar" id="finBottom"></div></div>
+      <div class="fin-border-left"><div class="fin-bar" id="finLeft"></div></div>
+
+      <!-- Dot mesh texture -->
+      <div class="fin-mesh"></div>
+
+      <!-- Pulse dots -->
+      <span class="fin-pulse-red"></span>
+      <span class="fin-pulse-blue"></span>
+
+      <!-- Content -->
+      <div class="fin-content">
+        <img src="Assets/financing logo.webp" alt="Financing Logo" class="fin-logo reveal">
+        <span class="fin-label reveal">Flexible Payment Options</span>
+        <h2 class="fin-title reveal">Financing <span>Available</span></h2>
+        <p class="fin-subtitle reveal">HVAC Financing in Sparta, Cookeville, Crossville, TN, &amp; Surrounding Areas</p>
+        <div class="fin-divider reveal"></div>
+        <p class="fin-desc reveal">*Credit and loans provided by Regions Bank d/b/a EnerBank USA, Member FDIC, (650 S Main St, Suite 1000, Salt Lake City, UT 84101) on approved credit, for a limited time. 8.99% to 15.99% fixed APR, subject to change. Minimum loan amounts apply. Interest starts accruing when funds are disbursed. Repayment terms vary from 12 to 144 months. Actual loan term may be shorter if less than the full approved amount of credit is used. First monthly loan payment due 30 days after funds are disbursed. Minimum monthly payments vary between $11.37 &amp; $90.73 per $1,000 borrowed. The minimum monthly payment will be no less than $50.00.</p>
+        <a href="contact.html" class="btn-primary reveal">
+          Apply Now
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED MANUFACTURERS -->
+<section class="fm-section">
+  <div class="fm-inner">
+    <div class="fm-header">
+      <div class="section-label reveal">Our Partners</div>
+      <h2 class="section-title reveal">Featured <span class="red">Manufacturers</span></h2>
+    </div>
+    <div class="fm-grid" id="fmGrid">
+
+      <div class="fm-card">
+        <img src="Assets/fm-1.webp" alt="Featured Manufacturer 1" class="fm-card-img">
+        <div class="fm-card-glow"></div>
+      </div>
+
+      <div class="fm-card">
+        <img src="Assets/fm-2.png" alt="Featured Manufacturer 2" class="fm-card-img">
+        <div class="fm-card-glow"></div>
+      </div>
+
+      <div class="fm-card">
+        <img src="Assets/fm-3.webp" alt="Featured Manufacturer 3" class="fm-card-img">
+        <div class="fm-card-glow"></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE AREAS -->
+<section class="areas" id="areas">
+  <div class="areas-card">
+    <div class="areas-text">
+      <div class="section-label reveal">Where We Work</div>
+      <h2 class="section-title reveal">Service <span class="red">Areas</span></h2>
+      <p class="areas-subtitle reveal">Proudly serving the Upper Cumberland region of Tennessee — we're close by and ready to help 24/7.</p>
+      <div class="areas-list reveal">
+        <div class="area-item"><span class="area-dot"></span><span class="area-name">Sparta</span><span class="area-state">TN</span></div>
+        <div class="area-item"><span class="area-dot"></span><span class="area-name">Cookeville</span><span class="area-state">TN</span></div>
+        <div class="area-item"><span class="area-dot"></span><span class="area-name">Crossville</span><span class="area-state">TN</span></div>
+        <div class="area-item"><span class="area-dot"></span><span class="area-name">Smithville</span><span class="area-state">TN</span></div>
+        <div class="area-item"><span class="area-dot"></span><span class="area-name">Spencer</span><span class="area-state">TN</span></div>
+        <div class="area-item"><span class="area-dot"></span><span class="area-name">McMinnville</span><span class="area-state">TN</span></div>
+        <div class="area-item"><span class="area-dot"></span><span class="area-name">Monterey</span><span class="area-state">TN</span></div>
+        <div class="area-item"><span class="area-dot"></span><span class="area-name">Fairfield Glade</span><span class="area-state">TN</span></div>
+      </div>
+      <a href="contact.html" class="btn-primary reveal">Get Free Quote</a>
+    </div>
+    <div class="areas-globe">
+      <canvas id="globeCanvas"></canvas>
+    </div>
+  </div>
+</section>
+
+
+<!-- FOOTER -->
+<section class="spline-cta reveal">
+  <div class="spline-card" id="splineCard">
+    <div class="spline-spotlight" id="splineSpotlight"></div>
+    <div class="spline-left">
+      <p class="spline-eyebrow">Get Started Today</p>
+      <h2 class="spline-heading">Call to Action</h2>
+      <p class="spline-desc">Ready for expert HVAC service? Our certified technicians are standing by 24/7. Drop your email below and we'll reach out with a free estimate — fast.</p>
+      <form class="spline-form" onsubmit="handleSplineForm(event)">
+        <input type="email" class="spline-input" placeholder="Enter your email address" required>
+        <button type="submit" class="btn-primary">
+          Request Service
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </form>
+    </div>
+    <div class="spline-right">
+      <spline-viewer url="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode" hide-logo></spline-viewer>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <canvas id="footerCanvas" aria-hidden="true"></canvas>
+  <div class="footer-main">
+    <div class="footer-brand">
+      <a href="index.html" class="nav-logo" style="margin-bottom:16px;display:inline-flex">
+        <img src="https://flattsheatingandcooling.com/wp-content/uploads/2023/07/logo.webp" alt="Flatts Heating &amp; Cooling" class="nav-logo-img">
+      </a>
+      <p class="footer-tagline">Proudly servicing the Sparta area for 15 years, with over 25 years of combined experience!</p>
+      <p>Your trusted local HVAC experts serving Sparta, TN and surrounding communities. Quality work, honest pricing, and 24/7 emergency availability.</p>
+      <div class="payment-icons" style="margin-top:20px">
+        <span class="pay-icon">VISA</span>
+        <span class="pay-icon">MASTERCARD</span>
+        <span class="pay-icon">AMEX</span>
+        <span class="pay-icon">DISCOVER</span>
+        <span class="pay-icon">CASH</span>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="index.html#areas">Service Areas</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="services.html">Air Conditioning</a></li>
+        <li><a href="services.html">Heating</a></li>
+        <li><a href="services.html">Heat Pumps</a></li>
+        <li><a href="services.html">Refrigeration</a></li>
+        <li><a href="services.html">Indoor Air Quality</a></li>
+        <li><a href="services.html">Generators</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact Us</h4>
+      <div class="footer-contact-item">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.87 9.8 19.79 19.79 0 01.78 1.14 2 2 0 012.76 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.18 6.18l1.28-1.28a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        <a href="tel:9318084249">(931) 808-4249</a>
+      </div>
+      <div class="footer-contact-item">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        9750 Crossville Hwy, Sparta, TN 38583
+      </div>
+      <div class="footer-contact-item">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        info@flattsheatingandcooling.com
+      </div>
+      <div class="footer-contact-item">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        24/7 Emergency Available
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; 2026 Flatt's Heating &amp; Cooling. All rights reserved.</span>
+    <div class="footer-bottom-right"><a href="https://ciwebgroup.com" target="_blank" rel="noopener" class="footer-dev-link"><span class="footer-dev-text">Developed by CI WEB GROUP</span><img src="Assets/ci-web-logo.svg" alt="CI Web Group" class="footer-dev-logo"></a></div>
+  </div>
+</footer>
+
+<script>
+// HIDE SPLINE BUILT-WITH LOGO
+function hideSplineLogo() {
+  const viewer = document.querySelector('spline-viewer');
+  if (!viewer) return;
+  const tryHide = () => {
+    const shadow = viewer.shadowRoot;
+    if (shadow) {
+      const style = document.createElement('style');
+      style.textContent = '#logo{display:none!important}a[href*="spline"]{display:none!important}[class*="logo"]{display:none!important}';
+      shadow.appendChild(style);
+    }
+  };
+  tryHide();
+  setTimeout(tryHide, 500);
+  setTimeout(tryHide, 1500);
+  setTimeout(tryHide, 3000);
+}
+hideSplineLogo();
+
+// SPLINE CARD SPOTLIGHT
+const splineCard = document.getElementById('splineCard');
+const splineSpotlight = document.getElementById('splineSpotlight');
+if (splineCard && splineSpotlight) {
+  splineCard.addEventListener('mousemove', (e) => {
+    const rect = splineCard.getBoundingClientRect();
+    splineSpotlight.style.left = (e.clientX - rect.left) + 'px';
+    splineSpotlight.style.top = (e.clientY - rect.top) + 'px';
+    splineSpotlight.style.opacity = '1';
+  });
+  splineCard.addEventListener('mouseleave', () => { splineSpotlight.style.opacity = '0'; });
+}
+function handleSplineForm(e) {
+  e.preventDefault();
+  const input = e.target.querySelector('.spline-input');
+  window.location.href = 'contact.html?email=' + encodeURIComponent(input.value);
+}
+
+// MOBILE DROPDOWN TOGGLES
+document.getElementById('mobServicesToggle').addEventListener('click',function(e){
+  e.stopPropagation();
+  const isOpen = document.getElementById('mobServicesMenu').classList.contains('open');
+  if(isOpen){
+    this.classList.remove('open');
+    document.getElementById('mobServicesMenu').classList.remove('open');
+  } else {
+    this.classList.add('open');
+    document.getElementById('mobServicesMenu').classList.add('open');
+  }
+});
+document.getElementById('mobAreasToggle').addEventListener('click',function(e){
+  e.stopPropagation();
+  const isOpen = document.getElementById('mobAreasMenu').classList.contains('open');
+  if(isOpen){
+    this.classList.remove('open');
+    document.getElementById('mobAreasMenu').classList.remove('open');
+  } else {
+    this.classList.add('open');
+    document.getElementById('mobAreasMenu').classList.add('open');
+  }
+});
+
+// NAVBAR SCROLL
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// HAMBURGER
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+function closeMobileMenu(){
+  hamburger.classList.remove('open');
+  mobileMenu.classList.remove('open');
+  document.body.style.overflow = '';
+  // reset dropdowns
+  document.getElementById('mobServicesToggle').classList.remove('open');
+  document.getElementById('mobServicesMenu').classList.remove('open');
+  document.getElementById('mobAreasToggle').classList.remove('open');
+  document.getElementById('mobAreasMenu').classList.remove('open');
+}
+hamburger.addEventListener('click', () => {
+  const opening = !mobileMenu.classList.contains('open');
+  if(opening){
+    hamburger.classList.add('open');
+    mobileMenu.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  } else {
+    closeMobileMenu();
+  }
+});
+mobileMenu.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => { closeMobileMenu(); });
+});
+
+// SCROLL REVEAL
+const revealEls = document.querySelectorAll('.reveal');
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); } });
+}, { threshold: 0.12 });
+revealEls.forEach(el => revealObs.observe(el));
+
+// FEATURED MANUFACTURERS REVEAL
+const fmCards = document.querySelectorAll('.fm-card');
+const fmObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('fm-visible'); fmObs.unobserve(e.target); } });
+}, { threshold: 0.15 });
+fmCards.forEach(c => fmObs.observe(c));
+
+// HERO CAROUSEL
+const carouselCards = Array.from(document.querySelectorAll('.carousel-card'));
+let carouselIdx = 0;
+const positions = ['pos-left', 'pos-center', 'pos-right', 'pos-hidden'];
+
+function setCarousel(idx) {
+  const n = carouselCards.length;
+  carouselCards.forEach((card, i) => {
+    card.className = 'carousel-card';
+    const rel = ((i - idx) % n + n) % n;
+    if (rel === 0) card.classList.add('pos-center');
+    else if (rel === 1) card.classList.add('pos-right');
+    else if (rel === n - 1) card.classList.add('pos-left');
+    else card.classList.add('pos-hidden');
+  });
+}
+
+setCarousel(0);
+let carouselTimer = setInterval(() => {
+  carouselIdx = (carouselIdx + 1) % carouselCards.length;
+  setCarousel(carouselIdx);
+}, 4000);
+
+// SERVICES CAROUSEL
+const chips = Array.from(document.querySelectorAll('.svc-chip'));
+const panels = Array.from(document.querySelectorAll('.svc-panel'));
+let svcIdx = 0;
+let svcTimer;
+let svcPaused = false;
+
+function setService(idx) {
+  svcIdx = idx;
+  chips.forEach((c, i) => c.classList.toggle('active', i === idx));
+  panels.forEach((p, i) => p.classList.toggle('active', i === idx));
+}
+
+chips.forEach((chip, i) => {
+  chip.addEventListener('click', () => {
+    setService(i);
+    clearInterval(svcTimer);
+    if (!svcPaused) startSvcTimer();
+  });
+});
+
+function startSvcTimer() {
+  svcTimer = setInterval(() => {
+    setService((svcIdx + 1) % chips.length);
+  }, 3000);
+}
+
+const svcGrid = document.querySelector('.services-grid');
+svcGrid.addEventListener('mouseenter', () => { svcPaused = true; clearInterval(svcTimer); });
+svcGrid.addEventListener('mouseleave', () => { svcPaused = false; startSvcTimer(); });
+
+startSvcTimer();
+
+// REMOVED GLOW CARDS SECTION
+if(false){document.querySelectorAll('.glow-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    const angle = Math.atan2(
+      e.clientY - (r.top + r.height / 2),
+      e.clientX - (r.left + r.width / 2)
+    ) * 180 / Math.PI + 90;
+    card.style.setProperty('--glow-start', angle);
+    card.style.setProperty('--glow-active', '1');
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.setProperty('--glow-active', '0');
+  });
+});}
+
+// STAGGER TESTIMONIALS
+(function(){
+  const TESTIMONIALS = [
+    { name:'Aaron C.', initial:'A', color:'#ff0006', quote:'Very fast, friendly, good bunch of guys. They were there when I needed them most and got my AC running in no time. Highly recommend!', source:'Google Review' },
+    { name:'Bull S.', initial:'B', color:'#1b3eef', quote:'Great people, they do really good work. Joey and his team are honest, professional, and fairly priced. Won\'t use anyone else.', source:'Google Review' },
+    { name:'Ginger F.', initial:'G', color:'#ff0006', quote:'They replaced our entire HVAC system quickly and professionally. Pricing was fair and they explained everything clearly. Couldn\'t be happier.', source:'Google Review' },
+    { name:'Marlene H.', initial:'M', color:'#1b3eef', quote:'Joey and his crew came out same day when my heat went out in the middle of winter. Absolute lifesavers. Friendly, fast, and affordable.', source:'Google Review' },
+    { name:'Terry W.', initial:'T', color:'#ff0006', quote:'I\'ve used Flatt\'s twice now — once for AC repair and once for a new heat pump. Both times were flawless. These guys really know their stuff.', source:'Google Review' },
+    { name:'Sandra K.', initial:'S', color:'#1b3eef', quote:'Professional, knowledgeable, and reasonably priced. They diagnosed my unit quickly and had it running the same afternoon. Five stars without question.', source:'Google Review' },
+    { name:'David R.', initial:'D', color:'#ff0006', quote:'Best HVAC company in the area by far. Showed up on time, finished ahead of schedule, and left the place spotless. Will always call Flatt\'s first.', source:'Google Review' },
+  ];
+
+  const CARD_W = 320;
+  const CARD_H = 310;
+  const stage = document.getElementById('staggerStage');
+  let activeIdx = 0;
+  let autoTimer;
+  let cardEls = [];
+
+  function isMobile() { return window.innerWidth <= 600; }
+
+  function starsHTML() {
+    return '<div class="stagger-stars">' + Array(5).fill('<span class="stagger-star">★</span>').join('') + '</div>';
+  }
+
+  // Build all cards once — transitions animate between positions
+  function buildCards() {
+    stage.innerHTML = '';
+    cardEls = TESTIMONIALS.map((t, i) => {
+      const card = document.createElement('div');
+      card.className = 'stagger-card';
+      const lineLen = Math.ceil(Math.sqrt(CARD_W * CARD_W + CARD_H * CARD_H));
+      card.innerHTML = `
+        <span class="stagger-line" style="width:${lineLen}px"></span>
+        <div class="stagger-avatar" style="background:${t.color}">${t.initial}</div>
+        ${starsHTML()}
+        <p class="stagger-quote">"${t.quote}"</p>
+        <p class="stagger-author">— ${t.name} &nbsp;·&nbsp; ${t.source}</p>
+      `;
+      card.style.width = CARD_W + 'px';
+      card.style.height = CARD_H + 'px';
+      card.style.borderRadius = '4px';
+      card.addEventListener('click', () => {
+        const n = TESTIMONIALS.length;
+        const rel = ((i - activeIdx) % n + n) % n;
+        const wrappedRel = rel > n / 2 ? rel - n : rel;
+        if (wrappedRel !== 0) { goTo(i); resetTimer(); }
+      });
+      stage.appendChild(card);
+      return card;
+    });
+  }
+
+  // Update transforms on existing cards — CSS transition handles the animation
+  function updatePositions() {
+    const mobile = isMobile();
+    const n = TESTIMONIALS.length;
+    const slideOffset = window.innerWidth;
+
+    cardEls.forEach((card, i) => {
+      const rel = ((i - activeIdx) % n + n) % n;
+      const wrappedRel = rel > n / 2 ? rel - n : rel;
+      const isCenter = wrappedRel === 0;
+      const absRel = Math.abs(wrappedRel);
+      const t = TESTIMONIALS[i];
+
+      // Toggle center styling
+      card.classList.toggle('stagger-card-center', isCenter);
+      card.querySelector('.stagger-avatar').style.background = isCenter ? 'rgba(255,255,255,0.25)' : t.color;
+
+      if (mobile) {
+        // Slide fully off-screen left/right, only center visible
+        const xShift = wrappedRel * slideOffset;
+        card.style.transform = `translateX(calc(-50% + ${xShift}px)) translateY(-50%)`;
+        card.style.opacity = isCenter ? '1' : '0';
+        card.style.zIndex = isCenter ? '10' : '1';
+        card.style.width = Math.min(CARD_W, window.innerWidth - 48) + 'px';
+        card.style.cursor = isCenter ? 'default' : 'auto';
+        card.style.pointerEvents = isCenter ? 'auto' : 'none';
+      } else {
+        const xShift = wrappedRel * (CARD_W / 1.5);
+        const yShift = absRel * 12;
+        const rot = wrappedRel * 2.5;
+        const opacity = Math.max(0, 1 - absRel * 0.25);
+        const scale = Math.max(0.75, 1 - absRel * 0.07);
+        card.style.transform = `translateX(calc(-50% + ${xShift}px)) translateY(calc(-50% + ${yShift}px)) rotate(${rot}deg) scale(${scale})`;
+        card.style.opacity = opacity;
+        card.style.zIndex = 10 - absRel;
+        card.style.width = CARD_W + 'px';
+        card.style.cursor = isCenter ? 'default' : 'pointer';
+        card.style.pointerEvents = absRel <= 2 ? 'auto' : 'none';
+      }
+    });
+  }
+
+  function goTo(idx) { activeIdx = idx; updatePositions(); }
+  function next() { goTo((activeIdx + 1) % TESTIMONIALS.length); }
+  function prev() { goTo((activeIdx - 1 + TESTIMONIALS.length) % TESTIMONIALS.length); }
+
+  function resetTimer() {
+    clearInterval(autoTimer);
+    autoTimer = setInterval(next, 4500);
+  }
+
+  document.getElementById('staggerNext').addEventListener('click', () => { next(); resetTimer(); });
+  document.getElementById('staggerPrev').addEventListener('click', () => { prev(); resetTimer(); });
+
+  buildCards();
+
+  // Set initial positions without transition, then enable
+  cardEls.forEach(c => { c.style.transition = 'none'; });
+  updatePositions();
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    cardEls.forEach(c => { c.style.transition = ''; });
+  }));
+
+  resetTimer();
+  window.addEventListener('resize', updatePositions);
+})();
+
+// HERO DOTTED SURFACE
+(function initHeroParticles() {
+  const container = document.getElementById('heroParticles');
+  if (!container || typeof THREE === 'undefined') return;
+
+  const SEPARATION = 150, AMOUNTX = 40, AMOUNTY = 60;
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(60, container.offsetWidth / container.offsetHeight, 1, 10000);
+  camera.position.set(0, 355, 1220);
+
+  const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+  renderer.setPixelRatio(window.devicePixelRatio);
+  renderer.setSize(container.offsetWidth, container.offsetHeight);
+  renderer.setClearColor(0x000000, 0);
+  container.appendChild(renderer.domElement);
+
+  const positions = [], colors = [];
+  for (let ix = 0; ix < AMOUNTX; ix++) {
+    for (let iy = 0; iy < AMOUNTY; iy++) {
+      positions.push(ix * SEPARATION - (AMOUNTX * SEPARATION) / 2, 0, iy * SEPARATION - (AMOUNTY * SEPARATION) / 2);
+      colors.push(0.07, 0.07, 0.09);
+    }
+  }
+
+  const geometry = new THREE.BufferGeometry();
+  geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+  geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+
+  const material = new THREE.PointsMaterial({ size: 7, vertexColors: true, transparent: true, opacity: 0.45, sizeAttenuation: true });
+  const points = new THREE.Points(geometry, material);
+  scene.add(points);
+
+  let count = 0;
+  function animate() {
+    requestAnimationFrame(animate);
+    const pos = geometry.attributes.position.array;
+    let i = 0;
+    for (let ix = 0; ix < AMOUNTX; ix++) {
+      for (let iy = 0; iy < AMOUNTY; iy++) {
+        pos[i * 3 + 1] = Math.sin((ix + count) * 0.3) * 50 + Math.sin((iy + count) * 0.5) * 50;
+        i++;
+      }
+    }
+    geometry.attributes.position.needsUpdate = true;
+    renderer.render(scene, camera);
+    count += 0.1;
+  }
+
+  window.addEventListener('resize', function() {
+    camera.aspect = container.offsetWidth / container.offsetHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(container.offsetWidth, container.offsetHeight);
+  });
+
+  animate();
+})();
+
+// FINANCING ANIMATED BORDER
+(function(){
+  const top    = document.getElementById('finTop');
+  const right  = document.getElementById('finRight');
+  const bottom = document.getElementById('finBottom');
+  const left   = document.getElementById('finLeft');
+  if (!top) return;
+  const speed = 0.5;
+  function tick() {
+    const t = Date.now() / 1000 * speed;
+    const tx =  Math.sin(t)            * 100;
+    const ry =  Math.cos(t)            * 100;
+    const bx =  Math.sin(t + Math.PI)  * 100;
+    const ly =  Math.cos(t + Math.PI)  * 100;
+    top.style.transform    = `translateX(${tx}%)`;
+    right.style.transform  = `translateY(${ry}%)`;
+    bottom.style.transform = `translateX(${bx}%)`;
+    left.style.transform   = `translateY(${ly}%)`;
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+})();
+
+// FOOTER DITHERING SHADER
+(function initFooterShader() {
+  const canvas = document.getElementById('footerCanvas');
+  if (!canvas) return;
+
+  const gl = canvas.getContext('webgl2');
+  if (!gl) return;
+
+  const COLOR_BACK  = [0.067, 0.094, 0.153, 1]; // #111827
+  const COLOR_FRONT = [0.106, 0.243, 0.937, 1]; // #1b3eef brand blue
+  const SHAPE = 4.0; // wave
+  const TYPE  = 4.0; // 8x8 bayer
+  const PX_SIZE = 3.0;
+  const SPEED = 0.4;
+
+  const simplexNoise = `
+vec3 permute(vec3 x){return mod(((x*34.)+1.)*x,289.);}
+float snoise(vec2 v){
+  const vec4 C=vec4(.211324865405187,.366025403784439,-.577350269189626,.024390243902439);
+  vec2 i=floor(v+dot(v,C.yy));
+  vec2 x0=v-i+dot(i,C.xx);
+  vec2 i1=(x0.x>x0.y)?vec2(1.,0.):vec2(0.,1.);
+  vec4 x12=x0.xyxy+C.xxzz;x12.xy-=i1;
+  i=mod(i,289.);
+  vec3 p=permute(permute(i.y+vec3(0.,i1.y,1.))+i.x+vec3(0.,i1.x,1.));
+  vec3 m=max(.5-vec3(dot(x0,x0),dot(x12.xy,x12.xy),dot(x12.zw,x12.zw)),0.);
+  m=m*m;m=m*m;
+  vec3 x=2.*fract(p*C.www)-1.;
+  vec3 h=abs(x)-.5;
+  vec3 ox=floor(x+.5);
+  vec3 a0=x-ox;
+  m*=1.79284291400159-.85373472095314*(a0*a0+h*h);
+  vec3 g;
+  g.x=a0.x*x0.x+h.x*x0.y;
+  g.yz=a0.yz*x12.xz+h.yz*x12.yw;
+  return 130.*dot(m,g);
+}`;
+
+  const vs = `#version 300 es
+precision mediump float;
+layout(location=0) in vec4 a_position;
+void main(){gl_Position=a_position;}`;
+
+  const fs = `#version 300 es
+precision mediump float;
+uniform float u_time;
+uniform vec2 u_resolution;
+uniform vec4 u_colorBack;
+uniform vec4 u_colorFront;
+uniform float u_pxSize;
+out vec4 fragColor;
+${simplexNoise}
+const int bayer8x8[64]=int[64](
+   0,32, 8,40, 2,34,10,42,
+  48,16,56,24,50,18,58,26,
+  12,44, 4,36,14,46, 6,38,
+  60,28,52,20,62,30,54,22,
+   3,35,11,43, 1,33, 9,41,
+  51,19,59,27,49,17,57,25,
+  15,47, 7,39,13,45, 5,37,
+  63,31,55,23,61,29,53,21
+);
+void main(){
+  float t=.5*u_time;
+  vec2 pxSizeUv=gl_FragCoord.xy;
+  pxSizeUv-=.5*u_resolution;
+  pxSizeUv/=u_pxSize;
+  vec2 pixelizedUv=floor(pxSizeUv)*u_pxSize/u_resolution.xy;
+  pixelizedUv+=.5;pixelizedUv-=.5;
+  // Sine wave shape
+  vec2 shape_uv=pixelizedUv*4.;
+  float wave=cos(.5*shape_uv.x-2.*t)*sin(1.5*shape_uv.x+t)*(.75+.25*cos(3.*t));
+  float shape=1.-smoothstep(-1.,1.,shape_uv.y+wave);
+  // 8x8 bayer dithering
+  ivec2 pos=ivec2(mod(pxSizeUv,8.));
+  float dithering=float(bayer8x8[pos.y*8+pos.x])/64.;
+  dithering-=.5;
+  float res=step(.5,shape+dithering);
+  vec3 fgColor=u_colorFront.rgb*u_colorFront.a;
+  float fgOpacity=u_colorFront.a;
+  vec3 bgColor=u_colorBack.rgb*u_colorBack.a;
+  float bgOpacity=u_colorBack.a;
+  vec3 color=fgColor*res;
+  float opacity=fgOpacity*res;
+  color+=bgColor*(1.-opacity);
+  opacity+=bgOpacity*(1.-opacity);
+  fragColor=vec4(color,opacity);
+}`;
+
+  function compileShader(type, src) {
+    const s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) { console.error(gl.getShaderInfoLog(s)); return null; }
+    return s;
+  }
+
+  const prog = gl.createProgram();
+  gl.attachShader(prog, compileShader(gl.VERTEX_SHADER, vs));
+  gl.attachShader(prog, compileShader(gl.FRAGMENT_SHADER, fs));
+  gl.linkProgram(prog);
+  if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) { console.error(gl.getProgramInfoLog(prog)); return; }
+
+  const buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,1,-1,-1,1,-1,1,1,-1,1,1]), gl.STATIC_DRAW);
+  const posLoc = gl.getAttribLocation(prog, 'a_position');
+  gl.enableVertexAttribArray(posLoc);
+  gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
+
+  const uTime     = gl.getUniformLocation(prog, 'u_time');
+  const uRes      = gl.getUniformLocation(prog, 'u_resolution');
+  const uBack     = gl.getUniformLocation(prog, 'u_colorBack');
+  const uFront    = gl.getUniformLocation(prog, 'u_colorFront');
+  const uPxSize   = gl.getUniformLocation(prog, 'u_pxSize');
+
+  const footer = canvas.closest('footer');
+  const startTime = Date.now();
+
+  function resize() {
+    const w = footer.offsetWidth;
+    const h = footer.offsetHeight;
+    canvas.width  = w;
+    canvas.height = h;
+    gl.viewport(0, 0, w, h);
+  }
+
+  function render() {
+    const t = (Date.now() - startTime) * 0.001 * SPEED;
+    gl.clear(gl.COLOR_BUFFER_BIT);
+    gl.useProgram(prog);
+    gl.uniform1f(uTime, t);
+    gl.uniform2f(uRes, canvas.width, canvas.height);
+    gl.uniform4fv(uBack, COLOR_BACK);
+    gl.uniform4fv(uFront, COLOR_FRONT);
+    gl.uniform1f(uPxSize, PX_SIZE);
+    gl.drawArrays(gl.TRIANGLES, 0, 6);
+    requestAnimationFrame(render);
+  }
+
+  resize();
+  window.addEventListener('resize', resize);
+  render();
+})();
+</script>
+
+<script type="module">
+import createGlobe from 'https://cdn.jsdelivr.net/npm/cobe@0.6.3/+esm';
+const canvas = document.getElementById('globeCanvas');
+if (canvas) {
+  let phi = 4.8;
+  let width = 0;
+  let pointerDown = false;
+  let pointerStart = 0;
+  let r = 0;
+
+  const onResize = () => { width = canvas.offsetWidth; };
+  window.addEventListener('resize', onResize);
+  onResize();
+
+  const globe = createGlobe(canvas, {
+    devicePixelRatio: 2,
+    width: width * 2,
+    height: width * 2,
+    phi: 4.8,
+    theta: 0.25,
+    dark: 0,
+    diffuse: 0.5,
+    mapSamples: 16000,
+    mapBrightness: 1.2,
+    baseColor: [1, 1, 1],
+    markerColor: [1, 0, 0.024],
+    glowColor: [0.75, 0.84, 1],
+    markers: [
+      { location: [35.929, -85.464], size: 0.08 },
+      { location: [36.163, -85.502], size: 0.07 },
+      { location: [35.949, -85.027], size: 0.07 },
+      { location: [35.961, -85.812], size: 0.06 },
+      { location: [35.749, -85.461], size: 0.06 },
+      { location: [35.684, -85.770], size: 0.07 },
+      { location: [36.146, -85.267], size: 0.06 },
+      { location: [36.000, -84.850], size: 0.06 },
+      { location: [40.712, -74.006], size: 0.04 },
+      { location: [34.052, -118.243], size: 0.04 },
+      { location: [51.507, -0.127], size: 0.04 },
+      { location: [48.856, 2.352], size: 0.04 },
+      { location: [35.689, 139.691], size: 0.04 },
+    ],
+    onRender(state) {
+      if (!pointerDown) phi += 0.003;
+      state.phi = phi + r;
+      state.width = width * 2;
+      state.height = width * 2;
+    }
+  });
+
+  setTimeout(() => { canvas.style.opacity = '1'; }, 100);
+
+  canvas.addEventListener('pointerdown', (e) => {
+    pointerDown = true;
+    pointerStart = e.clientX - r * 200;
+    canvas.style.cursor = 'grabbing';
+  });
+  canvas.addEventListener('pointerup', () => { pointerDown = false; canvas.style.cursor = 'grab'; });
+  canvas.addEventListener('pointerout', () => { pointerDown = false; canvas.style.cursor = 'grab'; });
+  canvas.addEventListener('pointermove', (e) => {
+    if (pointerDown) r = (e.clientX - pointerStart) / 200;
+  });
+  canvas.addEventListener('touchmove', (e) => {
+    if (pointerDown && e.touches[0]) r = (e.touches[0].clientX - pointerStart) / 200;
+  });
+
+  window.addEventListener('beforeunload', () => globe.destroy());
+}
+</script>
+</body>
+</html>

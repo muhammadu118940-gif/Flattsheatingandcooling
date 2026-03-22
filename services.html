@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services | Flatt's Heating & Cooling — Sparta, TN</title>
+<meta name="description" content="Full HVAC services in Sparta, TN — Air Conditioning, Heating, Heat Pumps, Ductless, Indoor Air Quality, Water Heaters, Generators, Gas Lines & more. Call (931) 808-4249.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --red:#ff0006;
+  --blue:#1b3eef;
+  --bg:#ffffff;
+  --surface:#f4f7ff;
+  --card:#ffffff;
+  --text:#111827;
+  --muted:#6b7280;
+  --border:rgba(0,0,0,0.09);
+  --radius:4px;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Barlow',sans-serif;font-weight:400;line-height:1.6;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+/* NAVBAR */
+#nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:20px 48px;display:flex;align-items:center;justify-content:space-between;transition:top 0.4s ease,left 0.4s ease,right 0.4s ease,padding 0.4s ease,background 0.4s ease,box-shadow 0.4s ease,border-radius 0.4s ease,border-color 0.4s ease}
+#nav.scrolled{background:rgba(255,255,255,0.95);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(0,0,0,0.09);padding:10px 32px;box-shadow:0 4px 24px rgba(0,0,0,0.09)}
+@media(min-width:900px){#nav.scrolled{top:12px;left:24px;right:24px;border-radius:10px}}
+.nav-logo{display:flex;align-items:center;flex-shrink:0}
+.nav-logo-img{height:44px;width:auto}
+.nav-links{display:flex;align-items:center;gap:36px;list-style:none}
+.nav-links a{font-size:13px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);position:relative;padding-bottom:3px;transition:color 0.3s}
+.nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--red);transition:width 0.35s ease}
+.nav-links a:hover{color:var(--text)}
+.nav-links a:hover::after{width:100%}
+.nav-links a.active{color:var(--text)}
+.nav-links a.active::after{width:100%;background:var(--red)}
+.nav-right{display:flex;align-items:center;gap:20px}
+.nav-phone{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--text);letter-spacing:0.02em}
+.nav-phone svg{color:var(--red)}
+.btn-nav{color:#fff;padding:10px 24px;font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;border-radius:var(--radius);transition:transform 0.2s;cursor:pointer;display:inline-block;border:2px solid transparent;background:linear-gradient(#1b3eef,#1b3eef) padding-box,conic-gradient(from var(--btn-angle),#1530c0 0%,#5577ff 30%,#fff 50%,#5577ff 70%,#1530c0 100%) border-box;animation:btn-spark 2.5s linear infinite}
+.btn-nav:hover{background:linear-gradient(#1530c0,#1530c0) padding-box,conic-gradient(from var(--btn-angle),#0f229a 0%,#4060ee 30%,#fff 50%,#4060ee 70%,#0f229a 100%) border-box;transform:translateY(-1px)}
+.hamburger{display:none;align-items:center;justify-content:center;cursor:pointer;background:none;border:1px solid rgba(0,0,0,0.12);padding:6px;width:36px;height:36px;border-radius:var(--radius);color:var(--text);transition:border-color 0.2s,background 0.2s}
+.hamburger:hover{background:var(--surface)}
+.hamburger-svg{display:block;width:20px;height:20px;transition:transform 0.3s ease-in-out}
+.hamburger.open .hamburger-svg{transform:rotate(-45deg)}
+.hamburger-svg .h-path1{transition:stroke-dasharray 0.3s ease-in-out,stroke-dashoffset 0.3s ease-in-out;stroke-dasharray:12 63}
+.hamburger.open .hamburger-svg .h-path1{stroke-dasharray:20 300;stroke-dashoffset:-32.42px}
+.mobile-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(255,255,255,0.99);backdrop-filter:blur(20px);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:32px;opacity:0;pointer-events:none;transition:opacity 0.3s}
+.mobile-menu.open{opacity:1;pointer-events:all;display:flex}
+.mobile-menu a{font-family:'Barlow Condensed',sans-serif;font-size:42px;font-weight:800;letter-spacing:0.05em;text-transform:uppercase;color:var(--muted);transition:color 0.2s}
+.mobile-menu a:hover{color:var(--text)}
+.mobile-menu .mob-phone{font-size:22px;font-family:'Barlow',sans-serif;font-weight:600;color:var(--text)}
+.mobile-menu .btn-nav{font-size:14px;padding:14px 40px}
+/* PAGE HERO */
+.page-hero{min-height:55vh;display:flex;align-items:center;position:relative;overflow:hidden;background:var(--bg)}
+.page-hero-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(0,0,0,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,0.04) 1px,transparent 1px);background-size:56px 56px}
+.page-hero-glow{position:absolute;top:-30%;left:-5%;width:700px;height:700px;background:radial-gradient(circle,rgba(255,0,6,0.10) 0%,transparent 65%);pointer-events:none}
+.page-hero::after{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(to bottom,#ff0006 0%,#1b3eef 100%);z-index:2}
+.page-hero-inner{position:relative;z-index:1;max-width:1400px;margin:0 auto;padding:140px 48px 80px;width:100%}
+.page-hero-label{font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--red);margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.page-hero-label::before{content:'';width:24px;height:3px;background:var(--red)}
+.page-hero-title{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(52px,6vw,100px);text-transform:uppercase;line-height:0.9;letter-spacing:-0.02em;color:var(--text);margin-bottom:20px}
+.page-hero-title .red{color:var(--red)}
+.page-hero-sub{font-size:17px;color:var(--muted);max-width:600px;line-height:1.65}
+/* UTILITY */
+.section-label{display:inline-flex;align-items:center;gap:10px;font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--red);margin-bottom:16px}
+.section-label::before{content:'';width:24px;height:3px;background:var(--red)}
+.section-title{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(40px,4vw,68px);text-transform:uppercase;line-height:0.95;letter-spacing:-0.01em;color:var(--text);margin-bottom:16px}
+.section-title .red{color:var(--red)}
+.section-inner{max-width:1400px;margin:0 auto}
+/* SERVICES GRID */
+.services-section{padding:100px 48px;background:var(--bg)}
+.services-intro{font-size:16px;color:var(--muted);max-width:640px;margin-bottom:60px;line-height:1.7}
+.svc-cards-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;background:var(--border);border-radius:8px;overflow:hidden}
+.svc-card{background:var(--surface);border:1px solid transparent;transition:all 0.3s;overflow:hidden}
+.svc-card:hover{background:var(--card);border-color:#ff0006;transform:translateY(-4px);z-index:1;position:relative}
+.svc-card-img{height:200px;overflow:hidden}
+.svc-card-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease}
+.svc-card:hover .svc-card-img img{transform:scale(1.06)}
+.svc-card-content{padding:28px}
+.svc-card-name{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:24px;text-transform:uppercase;letter-spacing:0.03em;color:var(--text);margin-bottom:10px}
+.svc-card-desc{font-size:14px;color:var(--muted);line-height:1.65;margin-bottom:18px}
+.svc-card-link{font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--red);display:inline-flex;align-items:center;gap:8px;transition:gap 0.2s}
+.svc-card-link:hover{gap:14px}
+/* PROCESS */
+.process-section{padding:100px 48px;background:var(--surface)}
+.process-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--border);border-radius:8px;overflow:hidden;margin-top:56px}
+.process-step{background:var(--surface);padding:40px 32px;position:relative}
+.process-step:not(:last-child)::after{content:'';position:absolute;top:50%;right:0;transform:translateY(-50%);width:1px;height:40%;background:var(--border)}
+.process-num{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:52px;color:#ff0006;line-height:1;margin-bottom:16px}
+.process-title{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:20px;text-transform:uppercase;letter-spacing:0.05em;color:var(--text);margin-bottom:10px}
+.process-desc{font-size:14px;color:var(--muted);line-height:1.65}
+/* FINANCING */
+.financing-section{padding:80px 48px;background:var(--bg)}
+.financing-inner{max-width:1400px;margin:0 auto;background:#1b3eef;border:1px solid #1b3eef;border-radius:8px;padding:60px;display:flex;align-items:center;gap:60px}
+.financing-content{flex:1}
+.financing-brand{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:36px;letter-spacing:0.05em;color:#fff;margin-bottom:12px}
+.financing-title{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:28px;color:#fff;margin-bottom:16px}
+.financing-desc{font-size:15px;color:rgba(255,255,255,0.85);line-height:1.7;max-width:600px}
+.financing-title{color:#fff!important}
+.btn-primary{display:inline-flex;align-items:center;gap:10px;color:#ffffff;padding:16px 32px;font-size:14px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;border-radius:var(--radius);transition:transform 0.2s;border:2px solid transparent;background:linear-gradient(#ff0006,#ff0006) padding-box,conic-gradient(from var(--btn-angle),#cc0005 0%,#ff6666 30%,#fff 50%,#ff6666 70%,#cc0005 100%) border-box;animation:btn-spark 2.5s linear infinite}
+.btn-primary:hover{background:linear-gradient(#cc0005,#cc0005) padding-box,conic-gradient(from var(--btn-angle),#990004 0%,#ff4444 30%,#fff 50%,#ff4444 70%,#990004 100%) border-box;transform:translateY(-2px)}
+.btn-blue{display:inline-flex;align-items:center;gap:10px;background:#1b3eef;color:#ffffff;padding:16px 32px;font-size:14px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;border-radius:var(--radius);transition:background 0.2s,transform 0.2s}
+.btn-blue:hover{background:#1530c0;transform:translateY(-2px)}
+.btn-outline{display:inline-flex;align-items:center;gap:10px;color:#fff;padding:15px 32px;font-size:14px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;border-radius:var(--radius);transition:transform 0.2s;border:2px solid transparent;background:linear-gradient(transparent,transparent) padding-box,conic-gradient(from var(--btn-angle),rgba(255,255,255,0.1) 0%,rgba(255,255,255,0.8) 40%,#fff 55%,rgba(255,255,255,0.8) 70%,rgba(255,255,255,0.1) 100%) border-box;animation:btn-spark 2.5s linear infinite}
+.btn-outline:hover{background:linear-gradient(rgba(255,255,255,0.05),rgba(255,255,255,0.05)) padding-box,conic-gradient(from var(--btn-angle),rgba(255,255,255,0.2) 0%,#fff 40%,#fff 55%,#fff 70%,rgba(255,255,255,0.2) 100%) border-box}
+/* CTA BANNER */
+.cta-banner{padding:100px 48px;background:var(--surface);text-align:center;position:relative;overflow:hidden}
+.cta-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:400px;background:radial-gradient(ellipse,rgba(255,0,6,0.12) 0%,transparent 70%);pointer-events:none}
+.cta-inner{position:relative;z-index:1;max-width:700px;margin:0 auto}
+.cta-tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--red);margin-bottom:16px}
+.cta-title{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(52px,6vw,96px);text-transform:uppercase;line-height:0.92;letter-spacing:-0.02em;color:#fff;margin-bottom:20px}
+.cta-title .red{color:#ffcdd2}
+.cta-sub{font-size:16px;color:rgba(255,255,255,0.85);margin-bottom:40px;line-height:1.6}
+.cta-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+/* FOOTER */
+footer{background:#111827;border-top:3px solid var(--red)}
+.footer-main{max-width:1400px;margin:0 auto;padding:72px 48px 48px;display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:48px}
+.footer-brand p{font-size:14px;color:rgba(255,255,255,0.55);line-height:1.7;margin:16px 0 24px}
+.footer-tagline{font-size:12px;font-style:italic;color:var(--muted);margin-bottom:16px!important}
+.payment-icons{display:flex;gap:8px;flex-wrap:wrap}
+.pay-icon{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);padding:5px 12px;border-radius:var(--radius);font-size:10px;font-weight:700;letter-spacing:0.08em;color:rgba(255,255,255,0.5)}
+.footer-col h4{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:0.1em;color:#fff;margin-bottom:20px}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.footer-col ul a{font-size:14px;color:rgba(255,255,255,0.55);transition:color 0.2s}
+.footer-col ul a:hover{color:#fff}
+.footer-contact-item{display:flex;gap:10px;font-size:14px;color:rgba(255,255,255,0.55);margin-bottom:12px;line-height:1.5}
+.footer-contact-item svg{flex-shrink:0;margin-top:2px;color:var(--red)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,0.1);max-width:1400px;margin:0 auto;padding:20px 48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.footer-copy{font-size:12px;color:rgba(255,255,255,0.4)}
+.footer-badge{font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#ffffff;background:#1b3eef;border:1px solid #1b3eef;padding:4px 12px;border-radius:40px}
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(32px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+/* RESPONSIVE */
+@media(max-width:900px){
+  #nav{padding:16px 24px}
+  #nav.scrolled{padding:12px 24px}
+  .nav-links,.nav-phone,.btn-nav{display:none}
+  .hamburger{display:flex}
+  .page-hero-inner{padding:120px 24px 60px}
+  .services-section,.process-section,.financing-section,.cta-banner{padding:60px 24px}
+  .svc-cards-grid{grid-template-columns:1fr}
+  .process-steps{grid-template-columns:1fr 1fr}
+  .financing-inner{flex-direction:column;gap:32px;padding:40px}
+  .footer-main{grid-template-columns:1fr;padding:48px 24px 32px}
+  .footer-bottom{padding:20px 24px;flex-direction:column;text-align:center}
+}
+@property --btn-angle{syntax:'<angle>';initial-value:0deg;inherits:false}
+@keyframes btn-spark{to{--btn-angle:360deg}}
+@media(max-width:600px){
+  .process-steps{grid-template-columns:1fr}
+  .cta-btns{flex-direction:column;align-items:center}
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="nav">
+  <a href="index.html" class="nav-logo">
+    <img src="https://flattsheatingandcooling.com/wp-content/uploads/2023/07/logo.webp" alt="Flatts Heating &amp; Cooling" class="nav-logo-img">
+  </a>
+  <ul class="nav-links">
+    <li><a href="services.html" class="active">Services</a></li>
+    <li><a href="index.html#areas">Service Areas</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="index.html#resources">Resources</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="tel:9318084249" class="nav-phone">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.87 9.8 19.79 19.79 0 01.78 1.14 2 2 0 012.76 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.18 6.18l1.28-1.28a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+      (931) 808-4249
+    </a>
+    <a href="contact.html" class="btn-nav">Free Quote</a>
+  </div>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <svg class="hamburger-svg" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path class="h-path1" d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22"/>
+      <path d="M7 16 27 16"/>
+    </svg>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="services.html">Services</a>
+  <a href="index.html#areas">Service Areas</a>
+  <a href="about.html">About</a>
+  <a href="index.html#resources">Resources</a>
+  <a href="tel:9318084249" class="mob-phone">(931) 808-4249</a>
+  <a href="contact.html" class="btn-nav">Get Free Quote</a>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-glow"></div>
+  <div class="page-hero-inner">
+    <div class="page-hero-label">What We Do</div>
+    <h1 class="page-hero-title">OUR <span class="red">SERVICES</span></h1>
+    <p class="page-hero-sub">From emergency repairs to full system installations, Flatt's Heating &amp; Cooling has the expertise and equipment to keep your home comfortable year-round.</p>
+  </div>
+</section>
+
+<!-- SERVICES GRID -->
+<section class="services-section">
+  <div class="section-inner">
+    <div class="section-label reveal">Full-Service HVAC</div>
+    <h2 class="section-title reveal">Everything Your Home <span class="red">Needs</span></h2>
+    <p class="services-intro reveal">With over 25 years of combined experience and partnerships with leading brands like Goodman, Trane, Rheem, and Generac — we deliver solutions built to last.</p>
+    <div class="svc-cards-grid reveal">
+      <div class="svc-card">
+        <div class="svc-card-img"><img src="https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=800&auto=format&fit=crop&q=75" alt="Air Conditioning"></div>
+        <div class="svc-card-content">
+          <div class="svc-card-name">Air Conditioning</div>
+          <div class="svc-card-desc">Stay cool through every Tennessee summer. We install, repair, and maintain all makes and models of central AC systems. From quick tune-ups to full system replacements, our technicians diagnose fast and fix it right the first time.</div>
+          <a href="contact.html" class="svc-card-link">Learn More →</a>
+        </div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-card-img"><img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?w=800&auto=format&fit=crop&q=75" alt="Heating"></div>
+        <div class="svc-card-content">
+          <div class="svc-card-name">Heating</div>
+          <div class="svc-card-desc">Reliable heating when you need it most. We service gas furnaces, electric heat systems, and everything in between. Don't get left in the cold — our 24/7 emergency team is always ready to respond.</div>
+          <a href="contact.html" class="svc-card-link">Learn More →</a>
+        </div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-card-img"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&auto=format&fit=crop&q=75" alt="Heat Pumps"></div>
+        <div class="svc-card-content">
+          <div class="svc-card-name">Heat Pumps</div>
+          <div class="svc-card-desc">Modern heat pump systems deliver efficient heating and cooling in one unit — ideal for Middle Tennessee's climate. We install and service all major heat pump brands with proper sizing for your home.</div>
+          <a href="contact.html" class="svc-card-link">Learn More →</a>
+        </div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-card-img"><img src="https://images.unsplash.com/photo-1527684651001-731c474bbb5a?w=800&auto=format&fit=crop&q=75" alt="Ductless HVAC"></div>
+        <div class="svc-card-content">
+          <div class="svc-card-name">Ductless HVAC</div>
+          <div class="svc-card-desc">Mini-split systems for any room, addition, or space without existing ductwork. Precise zone control, quiet operation, and energy efficiency make ductless systems a smart investment for modern homes.</div>
+          <a href="contact.html" class="svc-card-link">Learn More →</a>
+        </div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-card-img"><img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&auto=format&fit=crop&q=75" alt="Indoor Air Quality"></div>
+        <div class="svc-card-content">
+          <div class="svc-card-name">Indoor Air Quality</div>
+          <div class="svc-card-desc">Your family deserves clean air. We install UV germicidal lights, whole-home air purifiers, humidifiers, dehumidifiers, and advanced filtration systems to eliminate allergens, bacteria, and pollutants.</div>
+          <a href="contact.html" class="svc-card-link">Learn More →</a>
+        </div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-card-img"><img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=800&auto=format&fit=crop&q=75" alt="Water Heaters"></div>
+        <div class="svc-card-content">
+          <div class="svc-card-name">Water Heaters</div>
+          <div class="svc-card-desc">Traditional tank and tankless water heater installation, repair, and replacement. We carry top brands and can help you choose the right unit for your household's hot water demands and budget.</div>
+          <a href="contact.html" class="svc-card-link">Learn More →</a>
+        </div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-card-img"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&auto=format&fit=crop&q=75" alt="Generators"></div>
+        <div class="svc-card-content">
+          <div class="svc-card-name">Generators</div>
+          <div class="svc-card-desc">As an authorized Generac dealer, we install whole-home standby generators and portable units. Never worry about power outages again — protect your family and appliances with automatic backup power.</div>
+          <a href="contact.html" class="svc-card-link">Learn More →</a>
+        </div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-card-img"><img src="https://images.unsplash.com/photo-1540479859555-17af45c78602?w=800&auto=format&fit=crop&q=75" alt="Gas Lines"></div>
+        <div class="svc-card-content">
+          <div class="svc-card-name">Gas Lines</div>
+          <div class="svc-card-desc">Safe, code-compliant gas line installation and repair for HVAC systems, appliances, fireplaces, and outdoor grills. We handle everything from new installations to leak detection and repairs.</div>
+          <a href="contact.html" class="svc-card-link">Learn More →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OUR PROCESS -->
+<section class="process-section">
+  <div class="section-inner">
+    <div class="section-label reveal">How It Works</div>
+    <h2 class="section-title reveal">Our <span class="red">Process</span></h2>
+    <div class="process-steps reveal">
+      <div class="process-step">
+        <div class="process-num">01</div>
+        <div class="process-title">Call &amp; Schedule</div>
+        <div class="process-desc">Reach us 24/7 by phone or contact form. We'll gather some basic information about your system and schedule a convenient appointment — often same-day or next-day.</div>
+      </div>
+      <div class="process-step">
+        <div class="process-num">02</div>
+        <div class="process-title">Diagnosis</div>
+        <div class="process-desc">Our certified technician arrives on time, performs a thorough inspection of your system, and provides a clear, honest assessment with upfront pricing before any work begins.</div>
+      </div>
+      <div class="process-step">
+        <div class="process-num">03</div>
+        <div class="process-title">Repair &amp; Install</div>
+        <div class="process-desc">We use quality parts and proven techniques to fix or install your system correctly the first time. Our technicians work cleanly, efficiently, and with respect for your home.</div>
+      </div>
+      <div class="process-step">
+        <div class="process-num">04</div>
+        <div class="process-title">Follow-Up</div>
+        <div class="process-desc">We stand behind our work with a satisfaction warranty. After every job, we follow up to ensure your system is performing properly and you're completely satisfied.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINANCING -->
+<section class="financing-section">
+  <div class="financing-inner reveal">
+    <div class="financing-content">
+      <div class="financing-brand">EnerBank USA</div>
+      <div class="financing-title">Flexible Financing Available</div>
+      <div class="financing-desc">A new HVAC system is a major investment, and we want to make it accessible for every family. Through our partnership with EnerBank USA, we offer flexible financing options with competitive rates and manageable monthly payments. Don't let budget concerns delay your comfort and safety — ask us about financing on your next appointment.</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:16px;flex-shrink:0">
+      <a href="contact.html" class="btn-blue">Apply Now</a>
+      <a href="tel:9318084249" class="btn-outline">Call to Learn More</a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section class="cta-banner">
+  <div class="cta-glow"></div>
+  <div class="cta-inner">
+    <div class="cta-tag reveal">Ready to Get Comfortable?</div>
+    <h2 class="cta-title reveal">CALL US <span class="red">TODAY</span></h2>
+    <p class="cta-sub reveal">We're available 24/7 for emergency service. Get a free quote on any new installation.</p>
+    <div class="cta-btns reveal">
+      <a href="tel:9318084249" class="btn-primary">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.87 9.8 19.79 19.79 0 01.78 1.14 2 2 0 012.76 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.18 6.18l1.28-1.28a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        Call (931) 808-4249
+      </a>
+      <a href="contact.html" class="btn-blue">Schedule Online</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-main">
+    <div class="footer-brand">
+      <a href="index.html" class="nav-logo" style="margin-bottom:16px;display:inline-flex">
+        <img src="https://flattsheatingandcooling.com/wp-content/uploads/2023/07/logo.webp" alt="Flatts Heating &amp; Cooling" class="nav-logo-img">
+      </a>
+      <p class="footer-tagline">Proudly servicing the Sparta area for 15 years, with over 25 years of combined experience!</p>
+      <p>Your trusted local HVAC experts serving Sparta, TN and surrounding communities. Quality work, honest pricing, and 24/7 emergency availability.</p>
+      <div class="payment-icons" style="margin-top:20px">
+        <span class="pay-icon">VISA</span>
+        <span class="pay-icon">MASTERCARD</span>
+        <span class="pay-icon">AMEX</span>
+        <span class="pay-icon">DISCOVER</span>
+        <span class="pay-icon">CASH</span>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="index.html#areas">Service Areas</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="services.html">Air Conditioning</a></li>
+        <li><a href="services.html">Heating</a></li>
+        <li><a href="services.html">Heat Pumps</a></li>
+        <li><a href="services.html">Ductless HVAC</a></li>
+        <li><a href="services.html">Indoor Air Quality</a></li>
+        <li><a href="services.html">Water Heaters</a></li>
+        <li><a href="services.html">Generators</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact Us</h4>
+      <div class="footer-contact-item">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.87 9.8 19.79 19.79 0 01.78 1.14 2 2 0 012.76 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.18 6.18l1.28-1.28a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        <a href="tel:9318084249">(931) 808-4249</a>
+      </div>
+      <div class="footer-contact-item">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        9750 Crossville Hwy, Sparta, TN 38583
+      </div>
+      <div class="footer-contact-item">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        info@flattsheatingandcooling.com
+      </div>
+      <div class="footer-contact-item">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        24/7 Emergency Available
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; 2026 Flatt's Heating &amp; Cooling. All rights reserved.</span>
+    <span class="footer-badge">Licensed &amp; Insured</span>
+  </div>
+</footer>
+
+<script>
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 60); });
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('open');
+  mobileMenu.classList.toggle('open');
+  document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+});
+mobileMenu.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => {
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+    document.body.style.overflow = '';
+  });
+});
+const revealEls = document.querySelectorAll('.reveal');
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); } });
+}, { threshold: 0.1 });
+revealEls.forEach(el => revealObs.observe(el));
+// Init nav scrolled on load
+if (window.scrollY > 60) nav.classList.add('scrolled');
+</script>
+</body>
+</html>

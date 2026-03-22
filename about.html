@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us | Flatt's Heating & Cooling — Sparta, TN</title>
+<meta name="description" content="Meet Joey Flatt and the Flatt's Heating & Cooling team. 15 years serving Sparta, TN with over 25 years of combined HVAC experience. Trusted, licensed, and insured.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --red:#ff0006;
+  --blue:#1b3eef;
+  --bg:#ffffff;
+  --surface:#f4f7ff;
+  --card:#ffffff;
+  --text:#111827;
+  --muted:#6b7280;
+  --border:rgba(0,0,0,0.09);
+  --radius:4px;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Barlow',sans-serif;font-weight:400;line-height:1.6;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+/* NAVBAR */
+#nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:20px 48px;display:flex;align-items:center;justify-content:space-between;transition:top 0.4s ease,left 0.4s ease,right 0.4s ease,padding 0.4s ease,background 0.4s ease,box-shadow 0.4s ease,border-radius 0.4s ease,border-color 0.4s ease}
+#nav.scrolled{background:rgba(255,255,255,0.95);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(0,0,0,0.09);padding:10px 32px;box-shadow:0 4px 24px rgba(0,0,0,0.09)}
+@media(min-width:900px){#nav.scrolled{top:12px;left:24px;right:24px;border-radius:10px}}
+.nav-logo{display:flex;align-items:center;flex-shrink:0}
+.nav-logo-img{height:44px;width:auto}
+.nav-links{display:flex;align-items:center;gap:36px;list-style:none}
+.nav-links a{font-size:13px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);position:relative;padding-bottom:3px;transition:color 0.3s}
+.nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--red);transition:width 0.35s ease}
+.nav-links a:hover{color:var(--text)}
+.nav-links a:hover::after{width:100%}
+.nav-links a.active{color:var(--text)}
+.nav-links a.active::after{width:100%;background:var(--red)}
+.nav-right{display:flex;align-items:center;gap:20px}
+.nav-phone{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--text);letter-spacing:0.02em}
+.nav-phone svg{color:var(--red)}
+.btn-nav{color:#fff;padding:10px 24px;font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;border-radius:var(--radius);transition:transform 0.2s;cursor:pointer;display:inline-block;border:2px solid transparent;background:linear-gradient(#1b3eef,#1b3eef) padding-box,conic-gradient(from var(--btn-angle),#1530c0 0%,#5577ff 30%,#fff 50%,#5577ff 70%,#1530c0 100%) border-box;animation:btn-spark 2.5s linear infinite}
+.btn-nav:hover{background:linear-gradient(#1530c0,#1530c0) padding-box,conic-gradient(from var(--btn-angle),#0f229a 0%,#4060ee 30%,#fff 50%,#4060ee 70%,#0f229a 100%) border-box;transform:translateY(-1px)}
+.hamburger{display:none;align-items:center;justify-content:center;cursor:pointer;background:none;border:1px solid rgba(0,0,0,0.12);padding:6px;width:36px;height:36px;border-radius:var(--radius);color:var(--text);transition:border-color 0.2s,background 0.2s}
+.hamburger:hover{background:var(--surface)}
+.hamburger-svg{display:block;width:20px;height:20px;transition:transform 0.3s ease-in-out}
+.hamburger.open .hamburger-svg{transform:rotate(-45deg)}
+.hamburger-svg .h-path1{transition:stroke-dasharray 0.3s ease-in-out,stroke-dashoffset 0.3s ease-in-out;stroke-dasharray:12 63}
+.hamburger.open .hamburger-svg .h-path1{stroke-dasharray:20 300;stroke-dashoffset:-32.42px}
+.mobile-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(255,255,255,0.99);backdrop-filter:blur(20px);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:32px;opacity:0;pointer-events:none;transition:opacity 0.3s}
+.mobile-menu.open{opacity:1;pointer-events:all;display:flex}
+.mobile-menu a{font-family:'Barlow Condensed',sans-serif;font-size:42px;font-weight:800;letter-spacing:0.05em;text-transform:uppercase;color:var(--muted);transition:color 0.2s}
+.mobile-menu a:hover{color:var(--text)}
+.mobile-menu .mob-phone{font-size:22px;font-family:'Barlow',sans-serif;font-weight:600;color:var(--text)}
+.mobile-menu .btn-nav{font-size:14px;padding:14px 40px}
+/* PAGE HERO */
+.page-hero{min-height:55vh;display:flex;align-items:center;position:relative;overflow:hidden;background:var(--bg)}
+.page-hero-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(0,0,0,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,0.04) 1px,transparent 1px);background-size:56px 56px}
+.page-hero-glow{position:absolute;top:-30%;right:-5%;width:700px;height:700px;background:radial-gradient(circle,rgba(27,62,239,0.08) 0%,transparent 65%);pointer-events:none}
+.page-hero-glow2{position:absolute;bottom:-20%;left:5%;width:500px;height:500px;background:radial-gradient(circle,rgba(255,0,6,0.10) 0%,transparent 65%);pointer-events:none}
+.page-hero::after{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(to bottom,#1b3eef 0%,#ff0006 100%);z-index:2}
+.page-hero-inner{position:relative;z-index:1;max-width:1400px;margin:0 auto;padding:140px 48px 80px;width:100%}
+.page-hero-label{font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--red);margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.page-hero-label::before{content:'';width:24px;height:3px;background:var(--red)}
+.page-hero-title{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(52px,6vw,100px);text-transform:uppercase;line-height:0.9;letter-spacing:-0.02em;color:var(--text);margin-bottom:20px}
+.page-hero-title .red{color:var(--red)}
+.page-hero-sub{font-size:17px;color:var(--muted);max-width:600px;line-height:1.65;font-style:italic}
+/* UTILITY */
+.section-label{display:inline-flex;align-items:center;gap:10px;font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--red);margin-bottom:16px}
+.section-label::before{content:'';width:24px;height:3px;background:var(--red)}
+.section-title{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(40px,4vw,68px);text-transform:uppercase;line-height:0.95;letter-spacing:-0.01em;color:var(--text);margin-bottom:16px}
+.section-title .red{color:var(--red)}
+.section-inner{max-width:1400px;margin:0 auto}
+/* STORY SECTION */
+.story-section{padding:100px 48px;background:var(--surface)}
+.story-inner{display:flex;gap:80px;align-items:center}
+.story-image{width:480px;flex-shrink:0;position:relative}
+.story-img-wrap{height:560px;overflow:hidden;border-radius:var(--radius);position:relative}
+.story-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease}
+.story-section:hover .story-img-wrap img{transform:scale(1.04)}
+.story-accent{position:absolute;bottom:-24px;right:-24px;width:180px;height:180px;background:#ff0006;border-radius:var(--radius);z-index:-1;opacity:0.5}
+.story-badge{position:absolute;bottom:24px;left:24px;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);border:1px solid var(--border);padding:16px 20px;border-radius:var(--radius)}
+.story-badge-num{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:36px;color:var(--text);line-height:1}
+.story-badge-label{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+.story-text{flex:1}
+.story-text h2{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(44px,5vw,72px);text-transform:uppercase;line-height:0.92;letter-spacing:-0.02em;color:var(--text);margin-bottom:28px}
+.story-text h2 .red{color:var(--red)}
+.story-text p{font-size:15px;color:var(--muted);line-height:1.8;margin-bottom:20px}
+.owner-block{display:flex;align-items:center;gap:16px;margin-top:32px;padding:20px;background:var(--card);border-radius:var(--radius);border:1px solid var(--border)}
+.owner-avatar{width:56px;height:56px;background:linear-gradient(135deg,var(--red),#cc0005);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:24px;color:#fff;flex-shrink:0}
+.owner-name{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:18px;text-transform:uppercase;letter-spacing:0.05em;color:#fff}
+.owner-title{font-size:12px;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase;margin-top:2px}
+/* VALUES */
+.values-section{padding:100px 48px;background:var(--bg)}
+.values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--border);border-radius:8px;overflow:hidden;margin-top:56px}
+.value-card{background:var(--surface);padding:48px 36px;transition:background 0.25s}
+.value-card:hover{background:var(--card)}
+.value-icon{width:56px;height:56px;background:#ff0006;border-radius:var(--radius);display:flex;align-items:center;justify-content:center;margin-bottom:24px}
+.value-icon svg{color:#fff}
+.value-card:nth-child(2) .value-icon{background:#1b3eef}
+.value-title{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:24px;text-transform:uppercase;letter-spacing:0.03em;color:var(--text);margin-bottom:12px}
+.value-desc{font-size:14px;color:var(--muted);line-height:1.7}
+/* BRANDS */
+.brands-section{padding:60px 48px;background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.brands-inner{max-width:1400px;margin:0 auto;display:flex;align-items:center;gap:48px;flex-wrap:wrap;justify-content:center}
+.brands-label{font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted)}
+.brand-item{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:22px;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);transition:color 0.3s}
+.brand-item:hover{color:var(--text)}
+.brand-divider{width:1px;height:32px;background:var(--border)}
+/* STATS BAR */
+.stats-bar{background:var(--red)}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:rgba(0,0,0,0.15)}
+.stat-cell{background:var(--red);padding:52px 32px;text-align:center}
+.stat-num{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:72px;line-height:1;color:#fff;display:block}
+.stat-label{font-size:11px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.7);margin-top:6px;display:block}
+/* TESTIMONIALS */
+.testimonials{padding:100px 48px;background:var(--bg)}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--border);border-radius:8px;overflow:hidden;margin-top:56px}
+.testi-card{background:var(--bg);padding:44px;transition:background 0.25s}
+.testi-card:hover{background:var(--surface)}
+.testi-stars{display:flex;gap:4px;margin-bottom:20px}
+.star{color:#f59e0b;font-size:16px}
+.testi-quote{font-size:15px;font-style:italic;color:#374151;line-height:1.75;margin-bottom:28px;position:relative}
+.testi-quote::before{content:'\201C';font-size:48px;color:rgba(255,0,6,0.2);font-family:'Barlow Condensed',sans-serif;font-weight:900;line-height:1;display:block;margin-bottom:-16px}
+.testi-author{display:flex;align-items:center;gap:14px}
+.testi-avatar{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:18px;color:#fff;flex-shrink:0}
+.testi-name{font-size:14px;font-weight:600;color:var(--text)}
+.testi-source{font-size:11px;color:var(--muted);letter-spacing:0.06em}
+/* CTA BANNER */
+.cta-banner{padding:100px 48px;background:#1b3eef;text-align:center;position:relative;overflow:hidden}
+.cta-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:400px;background:radial-gradient(ellipse,rgba(255,0,6,0.25) 0%,transparent 70%);pointer-events:none}
+.cta-inner{position:relative;z-index:1;max-width:700px;margin:0 auto}
+.cta-tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.8);margin-bottom:16px}
+.cta-title{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(52px,6vw,96px);text-transform:uppercase;line-height:0.92;letter-spacing:-0.02em;color:#fff;margin-bottom:20px}
+.cta-title .red{color:#ffcdd2}
+.cta-sub{font-size:16px;color:rgba(255,255,255,0.85);margin-bottom:40px;line-height:1.6}
+.cta-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.btn-primary{display:inline-flex;align-items:center;gap:10px;color:#ffffff;padding:16px 32px;font-size:14px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;border-radius:var(--radius);transition:transform 0.2s;border:2px solid transparent;background:linear-gradient(#ff0006,#ff0006) padding-box,conic-gradient(from var(--btn-angle),#cc0005 0%,#ff6666 30%,#fff 50%,#ff6666 70%,#cc0005 100%) border-box;animation:btn-spark 2.5s linear infinite}
+.btn-primary:hover{background:linear-gradient(#cc0005,#cc0005) padding-box,conic-gradient(from var(--btn-angle),#990004 0%,#ff4444 30%,#fff 50%,#ff4444 70%,#990004 100%) border-box;transform:translateY(-2px)}
+.btn-blue{display:inline-flex;align-items:center;gap:10px;background:#1b3eef;color:#ffffff;padding:16px 32px;font-size:14px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;border-radius:var(--radius);transition:background 0.2s,transform 0.2s}
+.btn-blue:hover{background:#1530c0;transform:translateY(-2px)}
+/* FOOTER */
+footer{background:#111827;border-top:3px solid var(--red)}
+.footer-main{max-width:1400px;margin:0 auto;padding:72px 48px 48px;display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:48px}
+.footer-brand p{font-size:14px;color:rgba(255,255,255,0.55);line-height:1.7;margin:16px 0 24px}
+.footer-tagline{font-size:12px;font-style:italic;color:var(--muted);margin-bottom:16px!important}
+.payment-icons{display:flex;gap:8px;flex-wrap:wrap}
+.pay-icon{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);padding:5px 12px;border-radius:var(--radius);font-size:10px;font-weight:700;letter-spacing:0.08em;color:rgba(255,255,255,0.5)}
+.footer-col h4{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:0.1em;color:#fff;margin-bottom:20px}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.footer-col ul a{font-size:14px;color:rgba(255,255,255,0.55);transition:color 0.2s}
+.footer-col ul a:hover{color:#fff}
+.footer-contact-item{display:flex;gap:10px;font-size:14px;color:rgba(255,255,255,0.55);margin-bottom:12px;line-height:1.5}
+.footer-contact-item svg{flex-shrink:0;margin-top:2px;color:var(--red)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,0.1);max-width:1400px;margin:0 auto;padding:20px 48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.footer-copy{font-size:12px;color:rgba(255,255,255,0.4)}
+.footer-badge{font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#ffffff;background:#1b3eef;border:1px solid #1b3eef;padding:4px 12px;border-radius:40px}
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(32px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+/* RESPONSIVE */
+@media(max-width:900px){
+  #nav{padding:16px 24px}
+  #nav.scrolled{padding:12px 24px}
+  .nav-links,.nav-phone,.btn-nav{display:none}
+  .hamburger{display:flex}
+  .page-hero-inner{padding:120px 24px 60px}
+  .story-section,.values-section,.testimonials,.cta-banner{padding:60px 24px}
+  .brands-section{padding:40px 24px}
+  .story-inner{flex-direction:column;gap:48px}
+  .story-image{width:100%}
+  .story-img-wrap{height:380px}
+  .values-grid{grid-template-columns:1fr}
+  .testi-grid{grid-template-columns:1fr}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .footer-main{grid-template-columns:1fr;padding:48px 24px 32px}
+  .footer-bottom{padding:20px 24px;flex-direction:column;text-align:center}
+}
+@property --btn-angle{syntax:'<angle>';initial-value:0deg;inherits:false}
+@keyframes btn-spark{to{--btn-angle:360deg}}
+@media(max-width:600px){
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .cta-btns{flex-direction:column;align-items:center}
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="nav">
+  <a href="index.html" class="nav-logo">
+    <img src="https://flattsheatingandcooling.com/wp-content/uploads/2023/07/logo.webp" alt="Flatts Heating &amp; Cooling" class="nav-logo-img">
+  </a>
+  <ul class="nav-links">
+    <li><a href="services.html">Services</a></li>
+    <li><a href="index.html#areas">Service Areas</a></li>
+    <li><a href="about.html" class="active">About</a></li>
+    <li><a href="index.html#resources">Resources</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="tel:9318084249" class="nav-phone">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.87 9.8 19.79 19.79 0 01.78 1.14 2 2 0 012.76 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.18 6.18l1.28-1.28a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+      (931) 808-4249
+    </a>
+    <a href="contact.html" class="btn-nav">Free Quote</a>
+  </div>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <svg class="hamburger-svg" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path class="h-path1" d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22"/>
+      <path d="M7 16 27 16"/>
+    </svg>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="services.html">Services</a>
+  <a href="index.html#areas">Service Areas</a>
+  <a href="about.html">About</a>
+  <a href="index.html#resources">Resources</a>
+  <a href="tel:9318084249" class="mob-phone">(931) 808-4249</a>
+  <a href="contact.html" class="btn-nav">Get Free Quote</a>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-glow"></div>
+  <div class="page-hero-glow2"></div>
+  <div class="page-hero-inner">
+    <div class="page-hero-label">Our Story</div>
+    <h1 class="page-hero-title">ABOUT <span class="red">FLATT'S</span></h1>
+    <p class="page-hero-sub">Proudly servicing the Sparta area for 15 years, with over 25 years of combined experience!</p>
+  </div>
+</section>
+
+<!-- STORY SECTION -->
+<section class="story-section">
+  <div class="section-inner">
+    <div class="story-inner">
+      <div class="story-image reveal">
+        <div class="story-img-wrap">
+          <img src="https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=800&auto=format&fit=crop&q=75" alt="HVAC Technician at Work">
+        </div>
+        <div class="story-accent"></div>
+        <div class="story-badge">
+          <div class="story-badge-num">EST. 2009</div>
+          <div class="story-badge-label">Serving Sparta, TN</div>
+        </div>
+      </div>
+      <div class="story-text reveal">
+        <div class="section-label">Our History</div>
+        <h2>BUILT ON <span class="red">TRUST</span><br>& EXPERTISE</h2>
+        <p>Flatt's Heating &amp; Cooling was founded by Joey Flatt in 2009 with a simple mission: deliver honest, expert HVAC service to the Sparta community at a fair price. What started as a one-man operation has grown into a trusted team serving eight cities across Middle Tennessee.</p>
+        <p>With over 25 years of combined industry experience across our technician team, we've seen — and fixed — just about everything. From aging systems that need expert repair to new construction installs requiring precise engineering, our crew handles every job with the same care and professionalism.</p>
+        <p>We believe in using only quality parts, standing behind our work with comprehensive warranties, and treating every customer's home the way we'd treat our own. That's not just a tagline — it's how we've earned the trust of thousands of families across Sparta, Cookeville, Crossville, and beyond.</p>
+        <div class="owner-block">
+          <div class="owner-avatar">J</div>
+          <div>
+            <div class="owner-name">Joey Flatt</div>
+            <div class="owner-title">Owner &amp; Lead Technician</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION / VALUES -->
+<section class="values-section">
+  <div class="section-inner">
+    <div class="section-label reveal">What We Stand For</div>
+    <h2 class="section-title reveal">Our Mission &amp; <span class="red">Values</span></h2>
+    <div class="values-grid reveal">
+      <div class="value-card">
+        <div class="value-icon">
+          <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="value-title">Quality Parts</div>
+        <div class="value-desc">We never cut corners. Every component we install — from capacitors to compressors — is sourced from trusted manufacturers including Goodman, Trane, Rheem, and Generac. Quality parts mean fewer breakdowns and longer system life.</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">
+          <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        </div>
+        <div class="value-title">Expert Technicians</div>
+        <div class="value-desc">Our licensed and certified technicians bring decades of hands-on experience to every job. We stay current with the latest HVAC technologies through continuous training, so you always get service that meets or exceeds industry standards.</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">
+          <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="value-title">24/7 Availability</div>
+        <div class="value-desc">HVAC emergencies don't follow business hours, and neither do we. Our team is available around the clock, 365 days a year. When your heat goes out in January or your AC fails in August, one call is all it takes to get help on the way.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BRANDS STRIP -->
+<div class="brands-section">
+  <div class="brands-inner">
+    <span class="brands-label">Brands We Carry</span>
+    <div class="brand-divider"></div>
+    <span class="brand-item">Goodman</span>
+    <div class="brand-divider"></div>
+    <span class="brand-item">Trane</span>
+    <div class="brand-divider"></div>
+    <span class="brand-item">Rheem</span>
+    <div class="brand-divider"></div>
+    <span class="brand-item">Generac</span>
+  </div>
+</div>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stats-grid">
+    <div class="stat-cell">
+      <span class="stat-num">15+</span>
+      <span class="stat-label">Years in Business</span>
+    </div>
+    <div class="stat-cell">
+      <span class="stat-num">25+</span>
+      <span class="stat-label">Years Experience</span>
+    </div>
+    <div class="stat-cell">
+      <span class="stat-num">24/7</span>
+      <span class="stat-label">Emergency Service</span>
+    </div>
+    <div class="stat-cell">
+      <span class="stat-num">8+</span>
+      <span class="stat-label">Cities Served</span>
+    </div>
+  </div>
+</div>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="section-inner">
+    <div class="section-label reveal">What Customers Say</div>
+    <h2 class="section-title reveal">Real <span class="red">Reviews</span></h2>
+    <div class="testi-grid reveal">
+      <div class="testi-card">
+        <div class="testi-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+        <div class="testi-quote">Very fast, friendly, good bunch of guys. They were there when I needed them most and got my AC running in no time. Highly recommend!</div>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:#ff0006">A</div>
+          <div><div class="testi-name">Aaron C.</div><div class="testi-source">Google Review</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+        <div class="testi-quote">Great people, they do really good work. Joey and his team are honest, professional, and fairly priced. Won't use anyone else.</div>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:#1b3eef">B</div>
+          <div><div class="testi-name">Bull S.</div><div class="testi-source">Google Review</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+        <div class="testi-quote">Excellent HVAC service. Responded quickly to my call and had everything fixed the same day. Best in the area by far.</div>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:#1b3eef">J</div>
+          <div><div class="testi-name">Joey S.</div><div class="testi-source">Google Review</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section class="cta-banner">
+  <div class="cta-glow"></div>
+  <div class="cta-inner">
+    <div class="cta-tag reveal">Ready to Get Comfortable?</div>
+    <h2 class="cta-title reveal">CALL US <span class="red">TODAY</span></h2>
+    <p class="cta-sub reveal">We're available 24/7 for emergency service. Get a free quote on any new installation.</p>
+    <div class="cta-btns reveal">
+      <a href="tel:9318084249" class="btn-primary">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.87 9.8 19.79 19.79 0 01.78 1.14 2 2 0 012.76 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.18 6.18l1.28-1.28a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        Call (931) 808-4249
+      </a>
+      <a href="contact.html" class="btn-blue">Schedule Online</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-main">
+    <div class="footer-brand">
+      <a href="index.html" class="nav-logo" style="margin-bottom:16px;display:inline-flex">
+        <img src="https://flattsheatingandcooling.com/wp-content/uploads/2023/07/logo.webp" alt="Flatts Heating &amp; Cooling" class="nav-logo-img">
+      </a>
+      <p class="footer-tagline">Proudly servicing the Sparta area for 15 years, with over 25 years of combined experience!</p>
+      <p>Your trusted local HVAC experts serving Sparta, TN and surrounding communities. Quality work, honest pricing, and 24/7 emergency availability.</p>
+      <div class="payment-icons" style="margin-top:20px">
+        <span class="pay-icon">VISA</span>
+        <span class="pay-icon">MASTERCARD</span>
+        <span class="pay-icon">AMEX</span>
+        <span class="pay-icon">DISCOVER</span>
+        <span class="pay-icon">CASH</span>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="index.html#areas">Service Areas</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="services.html">Air Conditioning</a></li>
+        <li><a href="services.html">Heating</a></li>
+        <li><a href="services.html">Heat Pumps</a></li>
+        <li><a href="services.html">Ductless HVAC</a></li>
+        <li><a href="services.html">Indoor Air Quality</a></li>
+        <li><a href="services.html">Water Heaters</a></li>
+        <li><a href="services.html">Generators</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact Us</h4>
+      <div class="footer-contact-item">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.87 9.8 19.79 19.79 0 01.78 1.14 2 2 0 012.76 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.18 6.18l1.28-1.28a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        <a href="tel:9318084249">(931) 808-4249</a>
+      </div>
+      <div class="footer-contact-item">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        9750 Crossville Hwy, Sparta, TN 38583
+      </div>
+      <div class="footer-contact-item">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        info@flattsheatingandcooling.com
+      </div>
+      <div class="footer-contact-item">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        24/7 Emergency Available
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; 2026 Flatt's Heating &amp; Cooling. All rights reserved.</span>
+    <span class="footer-badge">Licensed &amp; Insured</span>
+  </div>
+</footer>
+
+<script>
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 60); });
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('open');
+  mobileMenu.classList.toggle('open');
+  document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+});
+mobileMenu.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => {
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+    document.body.style.overflow = '';
+  });
+});
+const revealEls = document.querySelectorAll('.reveal');
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); } });
+}, { threshold: 0.1 });
+revealEls.forEach(el => revealObs.observe(el));
+if (window.scrollY > 60) nav.classList.add('scrolled');
+</script>
+</body>
+</html>
